@@ -14,7 +14,7 @@ code.
   plan. Either this repository is made public at launch, or the site is
   deployed elsewhere (Cloudflare Pages, Netlify) from the private repo.
   See open questions.
-- Node LTS, `pnpm`; no client-side framework beyond what Starlight ships.
+- Node LTS, `npm`; no client-side framework beyond what Starlight ships.
 
 ## Pages
 
@@ -97,8 +97,12 @@ code.
 ## Milestones
 
 1. **Skeleton**: Astro + Starlight, home, install, three Getting started
-   pages, deploy from `main`.
+   pages, deploy from `main`. *Done, except the deploy, which waits for
+   the hosting question below.*
 2. **Concepts and guides**: the pages above, with examples from the demos.
+   *Concepts done (lanes, merging, git, why, lanes on lanes, permanent
+   lanes); guides to write: teams on `kito-server`, protected main and
+   approvals, checks and the sandbox.*
 3. **Reference**: generation scripts for CLI, configuration, MCP tools.
 4. **Download**: release workflow in kito, release data at build time,
    install script.
