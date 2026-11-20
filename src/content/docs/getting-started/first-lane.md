@@ -73,4 +73,4 @@ kito board
 ```
 
 `kito board` shows what each lane declared and is changing, and which lanes
-are on the same code. See [Lanes, intents and scopes](/concepts/lanes/).
+are on the same code. See [Lanes, intents and scopes](../../concepts/lanes/).

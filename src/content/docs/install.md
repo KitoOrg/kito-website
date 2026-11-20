@@ -23,7 +23,7 @@ Kito is four programs:
 
 :::note
 There is no public release yet. Until there is, build from source (below).
-The [download page](/download/) will list the archives for each platform.
+The [download page](../download/) will list the archives for each platform.
 :::
 
 ## From source
@@ -57,4 +57,4 @@ kito --version
 - **Linux 5.13 or later** confines the checks of an integration and the
   commands run in a lane (Landlock): they write only in their own copy.
 
-Next: [First steps](/getting-started/first-steps/).
+Next: [First steps](../getting-started/first-steps/).

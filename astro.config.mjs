@@ -4,6 +4,10 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	// GitHub Pages of the organisation; links inside the site are relative,
+	// so a domain of its own later only changes these two lines.
+	site: 'https://kitoorg.github.io',
+	base: '/kito-website',
 	integrations: [
 		starlight({
 			title: 'Kito',

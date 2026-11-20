@@ -15,7 +15,7 @@ In an existing git repository, bring its history in instead:
 kito import
 ```
 
-Both also set the project up for [Claude Code](/getting-started/claude-code/);
+Both also set the project up for [Claude Code](../claude-code/);
 `--no-claude` leaves that out.
 
 ## Every save is recorded
@@ -69,4 +69,4 @@ renamed, edited or moved to another file. Its whole story:
 kito why --history src/users.ts:fetchUser
 ```
 
-Next: [A first lane](/getting-started/first-lane/).
+Next: [A first lane](../first-lane/).

@@ -55,10 +55,10 @@ it started, with who changed it and what for.
 ## Integration
 
 `kito integrate` composes a lane's work with the main lane as it is now
-([function by function](/concepts/merging/)), runs the checks on the
+([function by function](../merging/)), runs the checks on the
 result, and records it under a checkpoint signed by the agent. Lanes that
 ask at the same time and do not touch the same files are checked together,
 in one run of the checks.
 
 Lanes can also start on another lane before it lands: see
-[Lanes on lanes](/concepts/lanes-on-lanes/).
+[Lanes on lanes](../lanes-on-lanes/).
