@@ -1,0 +1,161 @@
+---
+title: The life cycle of a change
+description: One change from task to checkpoint, step by step, in a team where agents write most of the code and people decide.
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+This page follows one change, from the moment somebody asks for it to the
+moment its reason is told to the next agent. Agents write the code. People
+decide what goes in.
+
+## Who does what
+
+| Who | What they do |
+| --- | --- |
+| The agent | Opens the lane, writes the code, reads the comments, asks for the integration |
+| The person it works for | Gives the task and owns the lane: the agent has that person's role |
+| A reviewer | Reads the lane's diff, comments, approves or asks for changes |
+| Whoever may integrate | Brings the lane into the main lane |
+
+One person can be several of these, but an owner's approval of their own
+lane does not count.
+
+<Aside>
+On one machine with no server there is one person: whoever runs the
+repository. Roles and required approvals are for a team's
+[server](../using-kito/#a-team-on-a-server).
+</Aside>
+
+## Step by step
+
+<Steps>
+
+1. **A task.** A person asks for something in plain words. Kito holds no
+   list of tasks. When a lane names its task, the name stays with the
+   reason of every change made for it.
+
+2. **A lane, with its reason and its scope.** The agent opens a lane with
+   the `open_lane` tool: one sentence saying why (the intent), and what it
+   will change (the scope). No lane opens without both. By hand:
+
+   ```bash
+   kito lane open agent-b --intent "prices in cents" --scope src/shop.py:total
+   ```
+
+3. **The agent is told why that code is the way it is.** The answer to
+   `open_lane` carries, for each function and file declared, the last
+   reasons it changed for and who uses it. It is in the answer of the tool,
+   so it reaches any agent on any model.
+
+4. **It works, held to its lane and its scope.** Every save in the lane is
+   recorded. For Claude Code, hooks refuse an edit in the main directory or
+   outside what the lane declared, before it is made. An edit on lines
+   written for a reason the lane was not told is held back once, with the
+   reasons. What a shell command changed is checked after it ran.
+
+5. **Lanes on the same code are told of each other.** Each is told once,
+   with what the other is there for. The second agent hears of it when it
+   declares its scope, before it writes a line. People see it on
+   `kito board`.
+
+6. **A person reviews.** The reviewer reads `kito lane diff` and comments
+   on a function, a file or lines. The agent's first edit after a comment
+   is held back once, with the comments it has not read. A request for
+   changes stops the lane. A repository may ask for approvals, from people
+   other than the lane's owner, before a lane goes in.
+
+   ```bash
+   kito lane comment 1 "Half a cent is lost: round, do not floor." --on src/shop.py:4
+   kito lane approve 1
+   ```
+
+7. **The lane is merged, function by function.** When the agent asks for
+   the integration, the lane is composed with the main lane as it is now.
+   Changes to different functions of a file do not conflict. A real
+   conflict stops that lane only, and waits for a decision: one side, or
+   the text written by hand. The lane's owner decides it, or somebody who
+   may integrate.
+
+   ```bash
+   kito conflicts
+   kito resolve conflict#1 --lane
+   ```
+
+8. **The checks run on the merged result.** The repository's commands run
+   on a copy of what the merge gave, not on the lane alone. A failing check
+   stops the lane and leaves the main lane as it was.
+
+9. **Somebody who may integrate lets it in.** If the agent's person may
+   integrate and no review is missing, the lane goes in at the agent's
+   request. Otherwise it waits and says for what, until somebody who may
+   integrate runs `kito integrate`, which merges and checks again.
+
+   ```text
+   lane/1: merged and checked, verified in 0.0 s; it waits for somebody who may integrate
+   ```
+
+10. **The result is a checkpoint that is also a git commit.** The commit
+    has the agent as its author, and a `Reviewed-by:` line for who
+    reviewed. It is pushed to the git remote if the repository names one.
+
+    ```text
+    lane/1: integrated as ckpt#2 (git 7ee4b1be89), verified in 0.0 s
+    ```
+
+11. **The reason stays with the code.** `kito why` answers for that
+    function with the intent, the agent and the person it worked for, the
+    lane, the checkpoint, the checks that passed and who let it in. The
+    next agent that declares this code is told its reasons, at step 3.
+
+</Steps>
+
+Agents have a tool to decide a conflict too (`resolve_conflict`), and Kito
+does not keep an agent from deciding one in its own lane. Whether agents
+may is for the team to say.
+
+## Beside the usual cycle
+
+| Step | Branch, pull request, review, merge | With Kito |
+| --- | --- | --- |
+| Start | A branch with a name | A lane with an intent and a scope |
+| Work | Commits, when the agent makes them | Every save recorded; edits outside the lane or its scope refused |
+| Knowing why | History and blame, if the agent looks | Told when the lane declares, and before it edits lines whose reason it was not told |
+| Others on the same code | Found when the branches are merged | Told when the second lane declares |
+| Review | A pull request: diff, comments, approvals | The lane: diff by function, comments the agent is told, verdicts, approvals |
+| Checks | CI on the branch or the pull request | The repository's commands on the merged result, before it lands |
+| Merge | Line by line; a conflict blocks the pull request | Function by function; a real conflict stops that lane only |
+| Result | A merge commit | A checkpoint that is also a git commit |
+| Afterwards | The message of the commit | The reason, kept with each function and line |
+
+What does not change: a person asks for the work, a person reviews it, and
+a person may have to approve it. The checks are the team's own commands.
+The result is a git commit, so GitHub and CI see what they saw before, and
+people who commit with plain git keep doing so
+([Git, both ways](../../concepts/git/)).
+
+## What Kito does not do
+
+- **It does not plan the work.** It holds no list of tasks and assigns
+  nothing. A task comes from a person, or from wherever the team keeps its
+  tasks.
+- **It does not run the agents.** An assistant such as Claude Code runs the
+  agent, on the model it was given. Kito gives it tools, rules and a lane.
+  The assistant and the model shown on a lane are what that side said of
+  itself: nothing checks it.
+- **It does not replace CI.** Its checks are commands run before a lane
+  lands. What CI does with a commit, such as building a release or
+  deploying, stays with CI, which sees each checkpoint as a git commit.
+- **It does not judge a change.** Being told a reason is not agreeing with
+  it: an edit held back once goes through the second time. Whether a change
+  that undoes a reason should land is for whoever integrates.
+- **It does not hold every agent at every edit.** The hooks of step 4 are
+  Claude Code's. Another agent is told the reasons when it declares and
+  before it integrates; what holds it at each edit is up to the plugin that
+  sets its assistant up. A shell command is checked after it ran, not
+  before.
+
+A reason is also only as good as the sentence a lane declared.
+
+Next: [Why it is faster for teams of agents](../why-faster/), with what was
+measured and what was not.
