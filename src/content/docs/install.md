@@ -1,6 +1,6 @@
 ---
 title: Install
-description: Install Kito on Linux, macOS, or Windows through WSL.
+description: Install Kito on Linux, macOS or Windows.
 ---
 
 Kito is four programs:
@@ -15,9 +15,9 @@ Kito is four programs:
 ## Platforms
 
 - **Linux** and **macOS**.
-- **Windows**: in WSL (Ubuntu). Keep your repositories in the Linux file
-  system (`~/…`), not under `/mnt/c`: file events and lane copies are slow
-  there.
+- **Windows** (10 or later), as it is. In WSL too: keep your repositories
+  in the Linux file system there (`~/…`), not under `/mnt/c`, where file
+  events and lane copies are slow.
 
 ## From a release
 

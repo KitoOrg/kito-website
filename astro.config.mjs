@@ -4,10 +4,9 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
-	// GitHub Pages of the organisation; links inside the site are relative,
-	// so a domain of its own later only changes these two lines.
-	site: 'https://kitoorg.github.io',
-	base: '/kito-website',
+	// GitHub Pages, at the project's own domain (`public/CNAME`). Links
+	// inside the site are relative: it is served from the root.
+	site: 'https://kito.sh',
 	integrations: [
 		starlight({
 			title: 'Kito',
@@ -17,6 +16,7 @@ export default defineConfig({
 			sidebar: [
 				{ label: 'Install', slug: 'install' },
 				{ label: 'Download', slug: 'download' },
+				{ label: 'Plugins', slug: 'plugins' },
 				{
 					label: 'Getting started',
 					items: [
