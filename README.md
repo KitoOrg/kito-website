@@ -2,7 +2,7 @@
 
 The website of [Kito](https://github.com/KitoOrg/kito): what it is, how to
 install it, where to download it, and its documentation. Built with Astro and
-Starlight; the plan is in [PLAN.md](PLAN.md).
+Starlight, and served at https://kito.sh.
 
 ## Work on it
 
