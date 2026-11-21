@@ -62,7 +62,7 @@ const plugins = [
 ];
 
 const code: [string, string][] = [
-	['a', 'export function total(prices: number[]): number {'],
+	['a', 'export function total(prices: number[]) {'],
 	['a', '  let sum = 0;'],
 	['a', '  for (const price of prices) {'],
 	['b', '    sum += Math.round(price * 100);'],
@@ -70,8 +70,8 @@ const code: [string, string][] = [
 	['a', '  return sum;'],
 	['a', '}'],
 	['', ' '],
-	['c', 'export function discount(amount: number, percent: number) {'],
-	['c', '  return Math.max(0, amount - (amount * percent) / 100);'],
+	['c', 'export function discount(amount: number, off: number) {'],
+	['c', '  return Math.max(0, amount - (amount * off) / 100);'],
 	['c', '}'],
 ];
 ---
@@ -104,7 +104,7 @@ const code: [string, string][] = [
 			</div>
 			<div class="card">
 				<h3>With Kito <span class="tag ok">integrated</span></h3>
-				<pre><span>export function total(prices) &#123; … &#125;</span><span> </span><span class="add">export function tax(amount) &#123; … &#125;       alice</span><span> </span><span class="add">export function receipt(prices) &#123; … &#125;   bob</span><span> </span><span> </span></pre>
+				<pre><span>export function total(prices) &#123; … &#125;</span><span> </span><span class="add">export function tax(amount) &#123; … &#125;<i>alice</i></span><span> </span><span class="add">export function receipt(prices) &#123; … &#125;<i>bob</i></span><span> </span><span> </span></pre>
 				<p class="foot">Two functions were added. Nobody was asked.</p>
 			</div>
 		</div>
@@ -401,6 +401,24 @@ const code: [string, string][] = [
 	}
 	.code span[data-r='c'] {
 		border-left-color: var(--k-zc);
+	}
+	/* Code fits its card: a line too long for it wraps, under itself. */
+	pre {
+		overflow-x: hidden;
+	}
+	pre span {
+		white-space: pre-wrap;
+	}
+	pre span i {
+		float: right;
+		margin-left: 1rem;
+		font-style: normal;
+		opacity: 0.8;
+	}
+	.code span {
+		white-space: pre-wrap;
+		padding-left: 2.2rem;
+		text-indent: -1.2rem;
 	}
 	.code span:not([data-r]) {
 		border-left: 3px solid transparent;
