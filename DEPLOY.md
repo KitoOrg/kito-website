@@ -50,6 +50,26 @@ platform's archive. `--url` says where the archive is when it is not at
 `kito.sh/downloads/`; `--copy` puts it in `public/downloads/`. The change
 is reviewed and merged like any other: merging it is publishing.
 
+## Signing the registry
+
+The registry is signed with a key of its own (ADR 0009 of Kito), kept
+off this repository and off whatever serves the site:
+
+```console
+$ kito registry key ~/keys/kito-sh-registry.key     # once: prints the public half
+$ kito registry sign public/registry --key ~/keys/kito-sh-registry.key
+```
+
+`sign` gives the index the next number and writes a `.sig` beside every
+file: commit them with the change. Sign after every change to the
+registry, never before: a file changed since it was signed is refused by
+everybody who knows the key.
+
+The public half goes in Kito (`PINNED` in `crates/kitod/src/registry.rs`)
+before the registry lists anything: from that release on, the registry
+at kito.sh is taken only as that key signed it. Until then it is taken
+as its address gives it.
+
 ## Publishing a release of Kito
 
 Put `kito-<version>-<platform>.tar.gz` and its `.sha256` in
