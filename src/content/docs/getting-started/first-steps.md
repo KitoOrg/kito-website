@@ -15,8 +15,18 @@ In an existing git repository, bring its history in instead:
 kito import
 ```
 
-Both also set the project up for [Claude Code](../claude-code/);
-`--no-claude` leaves that out.
+Both also set up your coding assistants. At a terminal, Kito looks for
+Claude Code, Codex and ZCode on your machine and asks, for each, whether
+to set it up here; the install script may have asked already, and
+`kito assistant default` says it once for every project. Any assistant is
+added later with one command:
+
+```bash
+kito assistant add claude    # or codex, zcode
+kito assistant list          # what this machine has, and how each is set up
+```
+
+`--no-assistants` sets none up.
 
 ## Every save is recorded
 

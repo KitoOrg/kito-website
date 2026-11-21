@@ -71,7 +71,7 @@
 		"summary": "ZCode set up to work through Kito: its rules and Kito's tools in the project, its hooks in your own configuration.",
 		"kinds": ["repository", "assistant"],
 		"permissions": ["read"],
-		"version": "0.1.1",
+		"version": "0.2.0",
 		"program": "kito-zcode",
 		"page": "plugins/zcode/",
 		"published": false

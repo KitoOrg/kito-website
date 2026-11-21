@@ -21,15 +21,20 @@ shows what happened. See [First steps](../../getting-started/first-steps/).
 
 ## Set an assistant up
 
-`kito init` and `kito import` also set the project up for Claude Code: the
-MCP server, the hooks that hold it to the rules, and the rules in
-`CLAUDE.md` ([With Claude Code](../../getting-started/claude-code/)). Any
-agent that speaks MCP can use `kito-mcp` as it is. An assistant other than
-Claude Code is set up by its [plugin](../../plugins/), once it is installed:
+Every assistant is set up with the same command. For Claude Code, Kito
+writes the MCP server, the hooks that hold it to the rules, and the rules
+in `CLAUDE.md` ([With Claude Code](../../getting-started/claude-code/));
+for Codex and ZCode, their [plugin](../../plugins/) does, fetched and
+enabled for you:
 
 ```bash
-kito assistant add codex
+kito assistant add claude codex
+kito assistant default claude codex   # what every new project gets
 ```
+
+`kito init` and `kito import` set up the ones you said, or ask at the
+terminal for the ones found on your machine. Any agent that speaks MCP
+can use `kito-mcp` as it is.
 
 ## A lane for each piece of work
 

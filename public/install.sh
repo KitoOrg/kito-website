@@ -4,9 +4,14 @@
 #
 #   curl -fsSL https://kito.sh/install.sh | sh
 #
+# Then it looks for the coding assistants this machine has (Claude Code,
+# Codex, ZCode) and asks, for each, whether every new Kito project should
+# get it set up: the answer is kept with `kito assistant default`.
+#
 # KITO_VERSION=0.23.0    a version instead of the latest
 # KITO_INSTALL_DIR=DIR   where the programs go
 # KITO_DOWNLOADS=URL     where the archives are (default https://kito.sh/downloads)
+# KITO_NO_ASK=1          ask nothing: say what was found, and how to choose
 #
 # What is downloaded is checked against its SHA-256 before anything of it
 # is put anywhere.
@@ -70,6 +75,44 @@ for program in kito kitod kito-mcp kito-server; do
 done
 
 say "Kito $version is in $DIR"
+
+# The coding assistants this machine has, and whether new projects get them.
+title() {
+  case "$1" in
+    claude) echo "Claude Code" ;;
+    codex) echo "Codex" ;;
+    zcode) echo "ZCode" ;;
+  esac
+}
+found=""
+for name in claude codex zcode; do
+  if command -v "$name" > /dev/null 2>&1 || [ -d "$HOME/.$name" ]; then
+    found="$found $name"
+  fi
+done
+if [ -n "$found" ]; then
+  # Asked at the terminal, even when this script came through a pipe.
+  if [ -z "${KITO_NO_ASK:-}" ] && (exec < /dev/tty) 2> /dev/null; then
+    wanted=""
+    for name in $found; do
+      printf 'kito: %s is on this machine. Set it up in every new Kito project? [Y/n] ' "$(title "$name")" > /dev/tty
+      read -r answer < /dev/tty || answer=n
+      case "$answer" in
+        n | N | no | No | NO) ;;
+        *) wanted="$wanted $name" ;;
+      esac
+    done
+    if [ -n "$wanted" ]; then
+      # shellcheck disable=SC2086
+      "$DIR/kito" assistant default $wanted > /dev/null && say "new projects get:$wanted (kito assistant default changes it)"
+    else
+      "$DIR/kito" assistant default --none > /dev/null && say "new projects get no assistant (kito assistant default changes it)"
+    fi
+  else
+    say "found here:$found. To set them up in every new project: kito assistant default$found"
+  fi
+fi
+
 case ":$PATH:" in
   *":$DIR:"*) ;;
   *) say "add it to your PATH:  export PATH=\"$DIR:\$PATH\"" ;;

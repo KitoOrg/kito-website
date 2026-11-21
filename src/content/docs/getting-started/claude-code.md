@@ -3,7 +3,15 @@ title: With Claude Code
 description: Let Claude Code work through Kito, one lane per task.
 ---
 
-`kito init` and `kito import` set the project up for Claude Code. They write:
+`kito init` and `kito import` set the project up for Claude Code when it is
+one of your assistants (they ask, or do what `kito assistant default`
+says). In a project that is already there:
+
+```bash
+kito assistant add claude
+```
+
+That writes:
 
 | File | What goes in it |
 | --- | --- |
@@ -13,7 +21,8 @@ description: Let Claude Code work through Kito, one lane per task.
 | `CLAUDE.md` | the rules: one lane per task, edits only in the lane, renames through `rename_symbol`, integrate at the end |
 
 Each file is touched only for what is missing in it; a second run changes
-nothing. To set up a project later: `kito claude`.
+nothing. `kito assistant remove claude` takes it out again. Codex and
+ZCode are set up the same way: `kito assistant add codex`.
 
 Then start Claude Code in the project directory. The first time, it asks to
 trust the folder and to approve the `kito` server; `/mcp` shows it connected.

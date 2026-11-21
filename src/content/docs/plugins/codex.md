@@ -12,11 +12,13 @@ project, and answers Codex before it changes files.
 A repository, by whoever works in it:
 
 ```bash
-kito plugin add codex
 cd your-repository
-kito plugin enable codex
 kito assistant add codex
 ```
+
+The same command as for every assistant: it installs this plugin from
+the registry when it is not there, enables it here, and runs it, saying
+each step.
 
 ```text
 Codex is set up for Kito in this repository:

@@ -4,8 +4,8 @@
 // The assistants, each as it is set up, what it gets, and how its lane looks.
 const assistants = [
 	{
-		id: 'cc', mark: 'CC', name: 'Claude Code', how: 'set up by kito init',
-		setup: ['kito init'],
+		id: 'cc', mark: 'CC', name: 'Claude Code', how: 'by Kito itself',
+		setup: ['kito assistant add claude'],
 		gets: [
 			'Kito\'s tools through its MCP server, and the rules in <code>CLAUDE.md</code>',
 			'Hooks that hold every edit to its lane and scope, and tell it why before it changes a line',
@@ -15,8 +15,8 @@ const assistants = [
 		href: '/getting-started/claude-code/', link: 'With Claude Code',
 	},
 	{
-		id: 'cx', mark: 'Cx', name: 'Codex', how: 'the kito-codex plugin',
-		setup: ['kito plugin add codex', 'kito plugin enable codex', 'kito assistant add codex'],
+		id: 'cx', mark: 'Cx', name: 'Codex', how: 'by its plugin, fetched for you',
+		setup: ['kito assistant add codex'],
 		gets: [
 			'Kito\'s tools in <code>.codex/config.toml</code>, and the rules in <code>AGENTS.md</code>',
 			'A hook that reads every patch before it is applied, and refuses it if Kito says no',
@@ -26,11 +26,11 @@ const assistants = [
 		href: '/plugins/codex/', link: 'The Codex plugin',
 	},
 	{
-		id: 'zc', mark: 'Zc', name: 'ZCode', how: 'the kito-zcode plugin',
-		setup: ['kito plugin add zcode', 'kito plugin enable zcode', 'kito assistant add zcode', 'kito zcode hooks install'],
+		id: 'zc', mark: 'Zc', name: 'ZCode', how: 'by its plugin, fetched for you',
+		setup: ['kito assistant add zcode'],
 		gets: [
 			'Kito\'s tools in <code>.zcode/config.json</code>, and the rules in <code>AGENTS.md</code>',
-			'Hooks before it writes a file and after a shell command',
+			'Hooks before it writes a file and after a shell command, in your own ZCode settings',
 			'Its name on every lane it works in',
 		],
 		model: 'ZCode', lane: { id: 'lane/12', agent: 'erin for bob', why: 'a discount never below zero' },
@@ -38,7 +38,7 @@ const assistants = [
 	},
 	{
 		id: 'mcp', mark: '∗', name: 'Any MCP client', how: 'through kito-mcp',
-		setup: ['kito init', '# then add kito-mcp to its MCP servers'],
+		setup: ['# add kito-mcp to its MCP servers, then:', 'kito init'],
 		gets: [
 			'Kito\'s tools: open a lane, declare its scope, ask why, integrate',
 			'The rules, checked again when its lane is integrated',
@@ -154,7 +154,7 @@ const code: [string, string][] = [
 	<section class="works">
 		<p class="kicker">Works with</p>
 		<h2>The assistants you already run.</h2>
-		<p class="sub">Kito does not replace your coding assistant: it gives it a lane, the rules, and the reasons behind the code. Every lane says which assistant works in it, and on what model.</p>
+		<p class="sub">Kito does not replace your coding assistant: it gives it a lane, the rules, and the reasons behind the code. One command sets any of them up, and <code>kito init</code> offers the ones it finds on your machine.</p>
 		<div class="assist">
 			<div class="pick" role="tablist" aria-label="Assistants">
 				{assistants.map((one, i) => (

@@ -5,7 +5,7 @@ description: Claude Code set up to work through Kito, by a plugin that also take
 
 `kito-claude` sets [Claude Code](https://claude.com/claude-code) up to work
 through Kito: its rules, Kito's tools, and the hooks that hold it to the
-rules. Kito sets Claude Code up itself as well, with `kito claude`, and the
+rules. Kito sets Claude Code up itself as well, with `kito assistant add claude`, and the
 plugin writes the same things. What the plugin adds is the way out, and
 that Claude Code is then one assistant among the others.
 
@@ -14,11 +14,13 @@ that Claude Code is then one assistant among the others.
 A repository, by whoever works in it:
 
 ```bash
-kito plugin add claude
 cd your-repository
-kito plugin enable claude
 kito assistant add claude
 ```
+
+The same command as for every assistant: it installs this plugin from
+the registry when it is not there, enables it here, and runs it, saying
+each step.
 
 ```text
 Claude Code is set up for Kito in this repository:
@@ -57,14 +59,14 @@ is neither replaced nor taken out.
 then one assistant among the others (`kito assistant list`).
 
 Kito sets Claude Code up itself, when a repository is made and with
-`kito claude` (see [With Claude Code](../../getting-started/claude-code/)).
+`kito assistant add claude` (see [With Claude Code](../../getting-started/claude-code/)).
 The plugin writes the same things in the same words: the rules are Kito's
 own text. A project set up by one is set up for the other.
 
 ## Limits
 
 - `kito` and `kito-mcp` must be on the PATH Claude Code runs with.
-- Rules that an older Kito wrote are brought up to date by `kito claude`,
+- Rules that an older Kito wrote are brought up to date by `kito assistant add claude`,
   which knows them; the plugin only sees that rules are there.
 
 ## Version

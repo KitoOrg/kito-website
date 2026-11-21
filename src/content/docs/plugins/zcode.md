@@ -5,30 +5,29 @@ description: ZCode set up to work through Kito, with hooks that are a person's o
 
 `kito-zcode` sets [ZCode](https://zcode.z.ai), the coding assistant of
 Z.ai, up to work through Kito. It writes the rules and Kito's tools in a
-project. The hooks that hold ZCode to the rules are a person's own, not the
-project's, and are installed apart.
+project, and the hooks that hold ZCode to the rules in your own ZCode
+settings, since ZCode runs no hooks of a project.
 
 ## Who enables it, and where
 
-A repository, by whoever works in it. The hooks are then installed by each
-person, for themselves:
+A repository, by whoever works in it:
 
 ```bash
-kito plugin add zcode
 cd your-repository
-kito plugin enable zcode
 kito assistant add zcode
 ```
 
-```text
-ZCode is set up for Kito in this repository:
-  wrote AGENTS.md
-  wrote .zcode/config.json
-ZCode is NOT held to the rules on this machine: 0 of Kito's 3 hooks are in ~/.zcode/cli/config.json.
-```
+The same command as for every assistant: it installs this plugin from
+the registry when it is not there, enables it here, and runs it, saying
+each step.
 
-```bash
-kito zcode hooks install
+```text
+Set up for ZCode:
+  enabled the plugin zcode here: it may read
+  ZCode is set up for Kito in this repository:
+    wrote AGENTS.md
+    wrote .zcode/config.json
+    wrote ~/.zcode/cli/config.json: Kito's hooks, for every project you open in ZCode
 ```
 
 ## What it asks for
@@ -85,4 +84,4 @@ the project; `kito zcode hooks remove`, what was written for you.
 
 ## Version
 
-0.1.1
+0.2.0

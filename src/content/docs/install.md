@@ -12,6 +12,14 @@ Kito is four programs:
 | `kito-mcp` | The MCP server agents talk to |
 | `kito-server` | One server for several repositories, for a team |
 
+## Your coding assistants
+
+After installing, the script looks for Claude Code, Codex and ZCode on
+your machine and asks, for each, whether every new Kito project should
+get it set up. The answer is kept: `kito assistant default` shows or
+changes it, and `kito assistant add <name>` sets one up in a project at
+any time. `KITO_NO_ASK=1` asks nothing.
+
 ## Platforms
 
 - **Linux** and **macOS**.
