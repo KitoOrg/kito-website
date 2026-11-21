@@ -15,13 +15,14 @@ That writes:
 
 | File | What goes in it |
 | --- | --- |
-| `.gitignore` | `.kito/`, so that git does not see Kito's own directory |
+| `.gitignore` | `.kito/`, and the files assistants read, so that git does not see them |
 | `.mcp.json` | the `kito` MCP server: `{ "command": "kito-mcp" }` |
 | `.claude/settings.json` | the Kito tools allowed, and hooks that hold Claude to the rules |
-| `CLAUDE.md` | the rules: one lane per task, edits only in the lane, renames through `rename_symbol`, integrate at the end |
+| `CLAUDE.md` | the rules: one lane per task, edits only in the lane, renames through `rename_symbol`, integrate at the end; then [what your team tells its agents](../../guide/instructions/) |
 
 Each file is touched only for what is missing in it; a second run changes
-nothing. `kito assistant remove claude` takes it out again. Codex and
+nothing. None of them is part of the repository: Kito keeps them out of
+its history and of git, and writes `CLAUDE.md` again at every session. `kito assistant remove claude` takes it out again. Codex and
 ZCode are set up the same way: `kito assistant add codex`.
 
 Then start Claude Code in the project directory. The first time, it asks to

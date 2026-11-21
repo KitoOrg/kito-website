@@ -1,4 +1,9 @@
 {
   "registry": 1,
-  "plugins": {}
+  "plugins": {
+    "kitchen": {
+      "about": "A team's kitchen: the behaviour, concepts and recipes it shares to work on its repositories",
+      "latest": "0.2.0"
+    }
+  }
 }

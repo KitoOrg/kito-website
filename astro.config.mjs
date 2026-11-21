@@ -30,6 +30,7 @@ export default defineConfig({
 						{ label: 'The life cycle of a change', slug: 'guide/lifecycle' },
 						{ label: 'Why it is faster for teams of agents', slug: 'guide/why-faster' },
 						{ label: 'Running a Kito server', slug: 'guide/server' },
+						{ label: 'What your agents are told', slug: 'guide/instructions' },
 					],
 				},
 				{

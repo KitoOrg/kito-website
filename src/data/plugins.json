@@ -38,7 +38,7 @@
 		"summary": "A team's shared behaviour, concepts, recipes and tools, kept on its server and given to every agent.",
 		"kinds": ["server"],
 		"permissions": ["read", "server_admin"],
-		"version": "0.3.0",
+		"version": "0.4.0",
 		"program": "kito-kitchen",
 		"page": "plugins/kitchen/",
 		"published": false

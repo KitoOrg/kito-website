@@ -4,15 +4,16 @@
 // writes `plugins/<name>.json` and `index.json`.
 //
 //   node scripts/registry-add.mjs <archive.tar.gz> --platform linux-x86_64
-//        [--url <where the archive is>] [--copy] [--registry public/registry]
+//        [--url <where the archive is>] [--registry public/registry]
 //
-// Without --url the archive is taken to be at kito.sh/downloads/<its name>;
-// --copy puts it in public/downloads/ so that it is. Run it once for each
-// platform's archive of a version. It changes files and nothing else:
-// the change is reviewed and merged like any other.
+// Without --url the archive is taken to be an asset of the plugin's release
+// on GitHub: github.com/KitoOrg/kito-<name>/releases/download/v<version>/
+// <its name>. The site lists plugins, and holds none of their files. Run it
+// once for each platform's archive of a version. It changes files and
+// nothing else: the change is reviewed and merged like any other.
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { basename, dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -32,9 +33,8 @@ const said = (flag) => {
 const platform = said('--platform');
 const url = said('--url');
 const registry = resolve(said('--registry') ?? join(here, 'public/registry'));
-const copy = args.includes('--copy') && args.splice(args.indexOf('--copy'), 1).length > 0;
 const archive = args[0];
-if (!archive || args.length !== 1) fail('usage: registry-add.mjs <archive.tar.gz> --platform <platform> [--url <address>] [--copy]');
+if (!archive || args.length !== 1) fail('usage: registry-add.mjs <archive.tar.gz> --platform <platform> [--url <address>]');
 if (!PLATFORMS.includes(platform)) fail(`--platform is one of ${PLATFORMS.join(', ')}`);
 if (!existsSync(archive)) fail(`${archive}: it is not there`);
 
@@ -57,16 +57,11 @@ if (!members.some((member) => program.test(member))) fail(`${archive}: the progr
 
 const bytes = readFileSync(archive);
 const file = {
-  url: url ?? `https://kito.sh/downloads/${basename(archive)}`,
+  url: url ?? `https://github.com/KitoOrg/kito-${name}/releases/download/v${version}/${basename(archive)}`,
   sha256: createHash('sha256').update(bytes).digest('hex'),
   size: statSync(archive).size,
 };
 if (!/^https:\/\//.test(file.url)) fail(`${file.url}: an archive is listed by an https address`);
-if (copy) {
-  const downloads = join(dirname(registry), 'downloads');
-  mkdirSync(downloads, { recursive: true });
-  copyFileSync(archive, join(downloads, basename(archive)));
-}
 
 const read = (path, empty) => (existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : empty);
 const write = (path, value) => writeFileSync(path, `${JSON.stringify(value, null, 2)}\n`);

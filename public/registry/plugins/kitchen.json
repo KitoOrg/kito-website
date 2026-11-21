@@ -1,0 +1,16 @@
+{
+  "name": "kitchen",
+  "about": "A team's kitchen: the behaviour, concepts and recipes it shares to work on its repositories",
+  "versions": {
+    "0.2.0": {
+      "api": 2,
+      "files": {
+        "linux-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-kitchen/releases/download/v0.2.0/kito-kitchen-0.2.0-linux-x86_64.tar.gz",
+          "sha256": "cb851825d16d6a3189a488e7fe7e3b654ca2fe9008aea805fcb106b308e92426",
+          "size": 500365
+        }
+      }
+    }
+  }
+}

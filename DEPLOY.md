@@ -36,19 +36,21 @@ Check them against GitHub's own page before trusting this table:
 - `/` the documents (Astro Starlight, `src/content/docs/`).
 - `/registry/` the registry of plugins (`public/registry/`, ADR 0008 of
   Kito): empty until something is published.
-- `/install.sh` installs Kito from `/downloads/` (`curl -fsSL
-  https://kito.sh/install.sh | sh`): it reads `/downloads/latest`, and
-  checks the archive against its `.sha256`. There is nothing in
-  `/downloads/` yet: nothing is public, and the script says so.
+- `/install.sh` installs Kito from the latest GitHub release of
+  `KitoOrg/kito` (`curl -fsSL https://kito.sh/install.sh | sh`), and
+  checks the archive against its `.sha256`. The site holds no archive:
+  until that repository is public and has a release, the script says
+  there is none.
 
 ## Listing a plugin
 
 `node scripts/registry-add.mjs <archive.tar.gz> --platform <platform>`
 reads the manifest inside the archive, computes its checksum, and writes
 `public/registry/plugins/<name>.json` and `index.json`. Once for each
-platform's archive. `--url` says where the archive is when it is not at
-`kito.sh/downloads/`; `--copy` puts it in `public/downloads/`. The change
-is reviewed and merged like any other: merging it is publishing.
+platform's archive. The archive is listed at the plugin's GitHub release,
+`github.com/KitoOrg/kito-<name>/releases/download/v<version>/`; `--url`
+says where it is otherwise. The site holds no archive. The change is
+reviewed and merged like any other: merging it is publishing.
 
 ## Signing the registry
 
@@ -72,10 +74,10 @@ as its address gives it.
 
 ## Publishing a release of Kito
 
-Put `kito-<version>-<platform>.tar.gz` and its `.sha256` in
-`public/downloads/`, and the version in `public/downloads/latest`. Large
-files are better as a public GitHub release, with `KITO_DOWNLOADS`
-pointing there, than in this repository.
+A tag `v<version>` in `KitoOrg/kito` makes its GitHub release
+(`release.yml` there): `kito-<version>-<platform>.tar.gz` and its
+`.sha256` for each platform. `install.sh` takes the latest from there;
+nothing of it is put on this site.
 
 ## What blocks it today
 

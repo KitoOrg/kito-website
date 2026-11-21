@@ -47,6 +47,8 @@ behaviour.md            how agents work here: always told
 concepts/<name>.md      what a word of the team means: looked up
 recipes/<name>.md       how something is done, step by step: looked up
 tools/<name>.toml       a command every agent has, and what it takes
+instructions/all/…      what every assistant is told, in its own file
+instructions/<assistant>/…  the same, for one assistant
 parts/<part>/…          the same, for the repositories that pick the part
 ```
 
@@ -63,8 +65,10 @@ parts/<part>/…          the same, for the repositories that pick the part
   base where both have something of the same name.
 
 It is changed like code: a lane in the kitchen's repository, a review, an
-integration. Nothing is copied into `CLAUDE.md` or `AGENTS.md`, so nothing
-goes stale there.
+integration. Its `instructions/` folder holds what every assistant is
+told, in Kito's [standard layout](../../guide/instructions/): Kito writes
+it into `CLAUDE.md` and `AGENTS.md` of each repository the kitchen is
+attached to, at every session, so nothing goes stale there.
 
 ## Using it
 

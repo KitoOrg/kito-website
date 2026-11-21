@@ -29,10 +29,15 @@ any time. `KITO_NO_ASK=1` asks nothing.
 
 ## From a release
 
-:::note
-There is no public release yet. Until there is, build from source (below).
-The [download page](../download/) will list the archives for each platform.
-:::
+```bash
+curl -fsSL https://kito.sh/install.sh | sh
+```
+
+The script takes the latest [release on GitHub](https://github.com/KitoOrg/kito/releases)
+for your platform, checks it against its SHA-256, and puts the four
+programs in `~/.local/bin`. `KITO_VERSION=0.27.0` installs another
+version, `KITO_INSTALL_DIR` another directory. The archives are on the
+[download page](../download/).
 
 ## From source
 

@@ -1,6 +1,7 @@
 #!/bin/sh
-# Installs Kito from kito.sh: `kito`, `kitod`, `kito-mcp` and
-# `kito-server`, in ~/.local/bin unless KITO_INSTALL_DIR says otherwise.
+# Installs Kito from its release on GitHub (github.com/KitoOrg/kito):
+# `kito`, `kitod`, `kito-mcp` and `kito-server`, in ~/.local/bin unless
+# KITO_INSTALL_DIR says otherwise.
 #
 #   curl -fsSL https://kito.sh/install.sh | sh
 #
@@ -8,16 +9,16 @@
 # Codex, ZCode) and asks, for each, whether every new Kito project should
 # get it set up: the answer is kept with `kito assistant default`.
 #
-# KITO_VERSION=0.23.0    a version instead of the latest
+# KITO_VERSION=0.27.0    a version instead of the latest
 # KITO_INSTALL_DIR=DIR   where the programs go
-# KITO_DOWNLOADS=URL     where the archives are (default https://kito.sh/downloads)
+# KITO_RELEASES=URL      the releases (default https://github.com/KitoOrg/kito/releases)
 # KITO_NO_ASK=1          ask nothing: say what was found, and how to choose
 #
 # What is downloaded is checked against its SHA-256 before anything of it
 # is put anywhere.
 set -eu
 
-BASE="${KITO_DOWNLOADS:-https://kito.sh/downloads}"
+RELEASES="${KITO_RELEASES:-https://github.com/KitoOrg/kito/releases}"
 DIR="${KITO_INSTALL_DIR:-$HOME/.local/bin}"
 
 say() { printf 'kito: %s\n' "$*" >&2; }
@@ -41,13 +42,17 @@ esac
 
 version="${KITO_VERSION:-}"
 if [ -z "$version" ]; then
-  version=$(curl -fsSL "$BASE/latest") || die "no release yet at $BASE (see https://kito.sh/install/ to build from source)"
+  # The latest release is where its page sends: .../releases/tag/v0.27.0
+  latest=$(curl -fsLI -o /dev/null -w '%{url_effective}' "$RELEASES/latest") \
+    || die "no release yet at $RELEASES (see https://kito.sh/install/ to build from source)"
+  version="${latest##*/}"
 fi
 version=$(printf '%s' "$version" | tr -d ' \n\r' | sed 's/^v//')
 case "$version" in
-  *[!0-9A-Za-z.+-]* | "") die "what $BASE/latest says is not a version" ;;
+  *[!0-9A-Za-z.+-]* | "" | latest | releases) die "no release yet at $RELEASES (see https://kito.sh/install/ to build from source)" ;;
 esac
 name="kito-$version-$os-$arch"
+BASE="$RELEASES/download/v$version"
 
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
