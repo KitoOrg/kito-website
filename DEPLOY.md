@@ -36,7 +36,26 @@ Check them against GitHub's own page before trusting this table:
 - `/` the documents (Astro Starlight, `src/content/docs/`).
 - `/registry/` the registry of plugins (`public/registry/`, ADR 0008 of
   Kito): empty until something is published.
-- `/downloads/` and `/install.sh` are not there yet: nothing is public.
+- `/install.sh` installs Kito from `/downloads/` (`curl -fsSL
+  https://kito.sh/install.sh | sh`): it reads `/downloads/latest`, and
+  checks the archive against its `.sha256`. There is nothing in
+  `/downloads/` yet: nothing is public, and the script says so.
+
+## Listing a plugin
+
+`node scripts/registry-add.mjs <archive.tar.gz> --platform <platform>`
+reads the manifest inside the archive, computes its checksum, and writes
+`public/registry/plugins/<name>.json` and `index.json`. Once for each
+platform's archive. `--url` says where the archive is when it is not at
+`kito.sh/downloads/`; `--copy` puts it in `public/downloads/`. The change
+is reviewed and merged like any other: merging it is publishing.
+
+## Publishing a release of Kito
+
+Put `kito-<version>-<platform>.tar.gz` and its `.sha256` in
+`public/downloads/`, and the version in `public/downloads/latest`. Large
+files are better as a public GitHub release, with `KITO_DOWNLOADS`
+pointing there, than in this repository.
 
 ## What blocks it today
 
