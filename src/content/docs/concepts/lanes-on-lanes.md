@@ -38,5 +38,3 @@ lane/3: lane/3 is built on lane/1, whose work is not on main yet: integrate lane
 
 A lane with lanes on it closes once the work they were built on has landed;
 they are then moved to where it went. Lanes stack as deep as needed.
-
-The design is in [ADR 0001](https://github.com/KitoOrg/kito/blob/main/docs/adr/0001-lanes-on-lanes.md).

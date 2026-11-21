@@ -86,8 +86,7 @@ says how old it is; what was never asked for is not there to give.
 
 ## Limits, and what was not tried
 
-- It has been run by its tests and Kito's, under Kito itself; not yet by a
-  team, with an assistant in a real session.
+- Not used yet by a team, with an assistant in a real session.
 - A tool runs confined to the lane where Kito can confine a command (Linux
   5.13 or later): it writes only there, reads nothing of Kito's own or of
   your keys, and reaches the network only if the kitchen says the tool
@@ -106,4 +105,4 @@ says how old it is; what was never asked for is not there to give.
 
 ## Version
 
-0.3.0, written for version 2 of the daemon's API.
+0.3.0

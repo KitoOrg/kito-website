@@ -77,8 +77,8 @@ nobody knows by heart. They are then added with `--identity oidc:<sub>`.
 
 What it checks, and what it keeps:
 
-- The provider is reached by https, always (but for one on this machine,
-  for tests), and must name itself as it was set up.
+- The provider is reached by https, always (but for one on this machine),
+  and must name itself as it was set up.
 - The ID token comes from the provider's token endpoint itself, over that
   connection. It must be from the issuer, for this client, not run out,
   and, for a browser, carry what the sign-in was started with (`nonce`).
@@ -91,8 +91,7 @@ What it checks, and what it keeps:
 ## Limits, and what was not tried
 
 - Not tried yet with a real client at a real provider: only what a provider
-  says of itself has been read from one. The tests ask a provider that is a
-  few lines of `tests/oidc.rs`.
+  says of itself has been read from one.
 - Not every provider has the device authorization grant.
   `kito-server oidc status` says whether this one does.
 - A provider that does not say whether an email was verified (Microsoft
@@ -105,4 +104,4 @@ What it checks, and what it keeps:
 
 ## Version
 
-0.1.0, written for version 1 of the daemon's API.
+0.1.0

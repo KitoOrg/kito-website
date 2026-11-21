@@ -74,9 +74,8 @@ the project; `kito zcode hooks remove`, what was written for you.
 ## Limits, and what was not tried
 
 - Nothing here has been run under ZCode: it is written from its
-  documentation (3.18 was current). The tests give Kito's hook what that
-  documentation says ZCode sends before it writes a file, and run the
-  plugin under Kito itself.
+  documentation (3.18 was current), and follows what that documentation
+  says ZCode sends before it writes a file.
 - Not confirmed: what ZCode sends for `Edit` (taken to be what Claude Code
   sends, as the rest is), and that it asks nothing before it uses the tools
   of a project's server.
@@ -86,4 +85,4 @@ the project; `kito zcode hooks remove`, what was written for you.
 
 ## Version
 
-0.1.1, written for version 1 of the daemon's API.
+0.1.1

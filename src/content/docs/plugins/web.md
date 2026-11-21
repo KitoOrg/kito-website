@@ -86,10 +86,6 @@ client's files. The server's administrators
 (`kito-server user admin <name>`) also get a page of the server's plugins:
 install, enable, disable and remove.
 
-`scripts/demo.sh` makes a repository to look at and serves it.
-`scripts/demo-team.sh` makes a server to look at, with two people and two
-repositories.
-
 ## Limits
 
 - Not yet: extending a lane's scope, renaming a function, permanent lanes'
@@ -99,9 +95,7 @@ repositories.
 - From the page of the server's plugins, a plugin is installed by its name
   from the server's registry and nothing else, and the plugin that serves
   the page is not taken out.
-- The tests run `kito-web` under a real Kito: installed as a plugin,
-  enabled in a repository, asked over HTTP.
 
 ## Version
 
-0.10.0, written for version 1 of the daemon's API.
+0.10.0

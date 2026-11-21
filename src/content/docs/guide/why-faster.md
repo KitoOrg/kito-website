@@ -61,16 +61,14 @@ other lanes go on. How much of a person's time this saves was not measured.
 
 ## What was measured
 
-Every figure here is from
-[`docs/benchmarks.md`](https://github.com/KitoOrg/kito/blob/main/docs/benchmarks.md)
-in the Kito repository, under the heading named. All were taken on one
-4-core virtual machine with a virtual disk: they are valid as comparisons
-on that machine, not as absolute values.
+Every figure here was taken on one 4-core virtual machine with a virtual
+disk: they are valid as comparisons on that machine, not as absolute
+values.
 
 ### Merges that git does not make
 
-In the benchmarks, "the same merges, given to git". A swarm of simulated agents works
-through the real daemon. For each integration, git is given the three
+Simulated agents work through Kito
+itself. For each integration, git is given the three
 states Kito merged, through `git merge-tree --write-tree`.
 
 | The same work | git | Kito |
@@ -79,13 +77,13 @@ states Kito merged, through `git merge-tree --write-tree`.
 | 6 agents, 8 rounds: 48 integrations | 8 merged, 40 conflicts | 48 merged, 0 conflicts |
 
 Every conflict of git is in one file, where each agent adds a method and a
-function at the same place. The script was written around that case: the
+function at the same place. The test was written around that case: the
 numbers say how far apart the two are on it, not how often real work looks
 like it.
 
 ### Waiting at the checks
 
-In the benchmarks, "waiting at the checks". Ten agents, each on a file of
+Ten agents, each on a file of
 its own, ask to be integrated at the same instant. The check is `sleep 2`.
 The wait is from an agent's request to its answer.
 
@@ -99,7 +97,7 @@ file, the first row still holds.
 
 ### The same operations as git
 
-In the benchmarks, "compared with git". Git 2.43 and Kito on the same 50,000 files,
+Git 2.43 and Kito on the same 50,000 files,
 with `git worktree` for the agents' working copies and `git merge --no-ff`
 to bring their work in.
 
@@ -117,7 +115,7 @@ operations: this table does not show Kito saving a team time.
 
 ### What the rules cost
 
-In the benchmarks, "the rules, checked before an edit". A repository of
+A repository of
 20,000 files and 500,000 operations. Times are of the whole command, as
 Claude Code runs it around a tool.
 
@@ -133,7 +131,7 @@ the rules cost little at each edit. It does not say that they save time.
 
 ### Integration on a large repository
 
-In the benchmarks, "integration and lane creation on a large repository". A
+A
 repository of 50,000 TypeScript files of 1 kB, with the checks and the git
 export off. Integrating a lane that changed one function in each of 50
 files took 90 ms, and 299 ms for 500 files. Creating a lane took 462–561 ms
@@ -147,13 +145,13 @@ every file copied: no file system with reflinks was available.
   to its integration.
 - **End-to-end time saved.** Every figure above is of one part: a merge, a
   wait at the checks, a command. None is of a whole change.
-- **How often real work conflicts.** The swarm's script was written around
+- **How often real work conflicts.** The test was written around
   one case. No history of real merges has been replayed.
 - **Review.** Whether a reviewer who is given the reasons reads faster was
   not measured.
 - **Rework.** How often an agent undoes something for want of its reason,
   with Kito or without, was not measured.
-- **Real agents, and many of them.** The agents of the swarm are simulated.
+- **Real agents, and many of them.** The agents measured are simulated.
   No figure here has more than ten agents, and all are from one machine.
 - **What agents cost.** Nothing was measured of what an agent spends, with
   the reasons told to it or without.

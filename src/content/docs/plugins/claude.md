@@ -59,8 +59,7 @@ then one assistant among the others (`kito assistant list`).
 Kito sets Claude Code up itself, when a repository is made and with
 `kito claude` (see [With Claude Code](../../getting-started/claude-code/)).
 The plugin writes the same things in the same words: the rules are Kito's
-own text, taken from it when the plugin is built, and a test holds the two
-together. A project set up by one is set up for the other.
+own text. A project set up by one is set up for the other.
 
 ## Limits
 
@@ -70,4 +69,4 @@ together. A project set up by one is set up for the other.
 
 ## Version
 
-0.1.1, written for version 1 of the daemon's API.
+0.1.1

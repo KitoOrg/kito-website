@@ -99,11 +99,10 @@ shop is connected to `shop` on kito.example.com:7421 as bob.
 ## Limits, and what was not tried
 
 - Not tried yet against GitHub itself, but for looking a login up: neither
-  signing in with a real OAuth app, nor issues with a real token. The tests
-  ask a GitHub that is a few lines of `tests/github.rs`.
+  signing in with a real OAuth app, nor issues with a real token.
 - `user add --identity` asks GitHub's public API without an account: sixty
   questions an hour from one address.
 
 ## Version
 
-0.2.0, written for version 1 of the daemon's API.
+0.2.0

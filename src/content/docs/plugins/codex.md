@@ -87,8 +87,8 @@ the hook: from Kito 0.25 the lane says which assistant works in it
   trusted it reads `.codex/config.toml` and starts `kito-mcp`, and the
   rules of `AGENTS.md` and Kito's tools are in what the model is given.
 - Not tried, since it takes a session with a model: Codex running the
-  hooks. The tests feed the hook what the Codex documentation says Codex
-  sends before a patch, and run it under Kito itself.
+  hooks. They follow what the Codex documentation says Codex sends before
+  a patch.
 - Not confirmed: which name its shell tool is matched by (it is
   `exec_command` to the model and `Bash` in the documentation: the hook
   names both), and whether it shows the model what the hooks after a
@@ -96,4 +96,4 @@ the hook: from Kito 0.25 the lane says which assistant works in it
 
 ## Version
 
-0.1.4, written for version 1 of the daemon's API.
+0.1.4

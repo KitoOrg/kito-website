@@ -64,7 +64,6 @@ export default defineConfig({
 						{ label: 'ZCode', slug: 'plugins/zcode' },
 					],
 				},
-				{ label: 'Design', slug: 'design' },
 			],
 		}),
 	],
