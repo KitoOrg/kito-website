@@ -23,8 +23,7 @@ A server, by its administrator. First a client at the provider (an
 Then the plugin, on the server:
 
 ```bash
-scripts/build.sh --dist
-kito-server plugin add --path plugin
+kito-server plugin add oidc
 kito-server plugin enable oidc
 kito-server oidc setup <issuer> <client id> [--secret-from <file>]
 ```

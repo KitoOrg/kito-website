@@ -14,7 +14,7 @@ that Claude Code is then one assistant among the others.
 A repository, by whoever works in it:
 
 ```bash
-kito plugin add --path plugin
+kito plugin add claude
 cd your-repository
 kito plugin enable claude
 kito assistant add claude

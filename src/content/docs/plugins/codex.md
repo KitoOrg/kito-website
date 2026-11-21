@@ -12,7 +12,7 @@ project, and answers Codex before it changes files.
 A repository, by whoever works in it:
 
 ```bash
-kito plugin add --path plugin
+kito plugin add codex
 cd your-repository
 kito plugin enable codex
 kito assistant add codex

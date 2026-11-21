@@ -17,16 +17,14 @@ enabled them, with the permissions it gave.
 | `codex`, `claude`, `zcode` | A coding assistant set up to work through Kito: its rules, Kito's tools, the hooks that hold it to them |
 
 ```bash
-kito plugin add --path <directory>   # installed for you
+kito plugin add <name>               # from the registry at kito.sh, installed for you
 kito plugin enable <name>            # this repository lets it run
 ```
 
-:::note
-The registry at `kito.sh/registry` is empty: no plugin is published yet.
-Until one is, a plugin is installed from a directory that holds its
-program and its `kito-plugin.toml`. `kito plugin add <name>` will read the
-registry.
-:::
+`kito plugin search` lists what the registry has, and `kito plugin
+update` brings what you installed up to date. A plugin of your own, or one
+you built, is installed from the directory that holds its program and its
+`kito-plugin.toml`: `kito plugin add --path <directory>`.
 
 A plugin is a program run as you. Kito limits what its daemon answers a
 plugin; it does not confine what the program does on your machine. Install

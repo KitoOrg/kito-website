@@ -15,7 +15,7 @@ A server, by its administrator:
 ```bash
 kito-server kitchen new ./kitchen "Shopworks"      # files to start from
 kito-server repo add kitchen --from <a git repository of them>
-kito-server plugin add --path plugin
+kito-server plugin add kitchen
 kito-server plugin enable kitchen --for-clients
 kito-server kitchen set kitchen
 kito-server kitchen parts shop rust web            # what `shop` picks
@@ -23,7 +23,7 @@ kito-server kitchen show shop                      # what it gets
 kito-server kitchen check                          # what is wrong with it
 ```
 
-Each person installs it once: `kito plugin add --path plugin`. In a directory
+Each person installs it once: `kito plugin add kitchen`. In a directory
 connected to the server there is nothing to enable: the server did.
 
 ## What it asks for

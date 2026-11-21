@@ -29,8 +29,7 @@ GitHub (Settings → Developer settings → OAuth Apps → New OAuth App), with
 `https://<the server's HTTP address>/-/sign-in/github/callback`. Then:
 
 ```bash
-scripts/build.sh --dist
-kito-server plugin add --path plugin
+kito-server plugin add github
 kito-server plugin enable github
 kito-server github setup <client id>
 ```

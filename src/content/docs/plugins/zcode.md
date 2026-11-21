@@ -14,7 +14,7 @@ A repository, by whoever works in it. The hooks are then installed by each
 person, for themselves:
 
 ```bash
-kito plugin add --path plugin
+kito plugin add zcode
 cd your-repository
 kito plugin enable zcode
 kito assistant add zcode

@@ -10,13 +10,11 @@ repository's daemon what `kito` asks, within the permissions it was given.
 
 ## Who enables it, and where
 
-**A repository**, for whoever runs it, on their machine. Nothing is in the
-registry yet ([Installing and writing plugins](../installing/)): the plugin
-is built from its repository, installed for you, then enabled.
+**A repository**, for whoever runs it, on their machine: the plugin is
+installed for you, then enabled.
 
 ```bash
-scripts/build.sh                    # the client, then the program: plugin/
-kito plugin add --path plugin       # installed for you
+kito plugin add web                 # installed for you
 cd your-repository
 kito plugin enable web              # this repository lets it read, write and integrate
 kito web                            # prints the address to open
@@ -26,7 +24,7 @@ kito web                            # prints the address to open
 address:
 
 ```bash
-kito-server plugin add --path plugin
+kito-server plugin add web
 kito-server plugin enable web
 kito-server serve --http 0.0.0.0:7443     # https://<the server>:7443/
 ```
