@@ -1,0 +1,36 @@
+/* Kito's own look, the one of its web client: indigo on a cool paper,
+   Geist and Geist Mono. Starlight draws with these. */
+:root {
+	--sl-font: 'Geist Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--sl-font-mono: 'Geist Mono Variable', ui-monospace, 'Cascadia Mono', Menlo, Consolas, monospace;
+}
+
+/* Dark, which Starlight takes first. */
+:root {
+	--sl-color-accent-low: #201d52;
+	--sl-color-accent: #5a50d8;
+	--sl-color-accent-high: #c4c1fa;
+	--sl-color-white: #ffffff;
+	--sl-color-gray-1: #eaeaf2;
+	--sl-color-gray-2: #c3c2d0;
+	--sl-color-gray-3: #9897a8;
+	--sl-color-gray-4: #5a596a;
+	--sl-color-gray-5: #2f2e3b;
+	--sl-color-gray-6: #1d1d26;
+	--sl-color-black: #15151c;
+}
+
+:root[data-theme='light'] {
+	--sl-color-accent-low: #dedcf9;
+	--sl-color-accent: #4a41c4;
+	--sl-color-accent-high: #2a2382;
+	--sl-color-white: #1b1b24;
+	--sl-color-gray-1: #23222c;
+	--sl-color-gray-2: #3a3947;
+	--sl-color-gray-3: #5d5c6b;
+	--sl-color-gray-4: #807f90;
+	--sl-color-gray-5: #c3c2d0;
+	--sl-color-gray-6: #ececf4;
+	--sl-color-gray-7: #f6f6fa;
+	--sl-color-black: #ffffff;
+}

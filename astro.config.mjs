@@ -10,6 +10,11 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Kito',
+			// Kito's mark, beside its name: three lanes that become one.
+			logo: { light: './src/assets/kito-light.svg', dark: './src/assets/kito-dark.svg', alt: '' },
+			favicon: '/favicon.svg',
+			// The typeface is carried with the site: nothing is asked of anybody else.
+			customCss: ['@fontsource-variable/geist', '@fontsource-variable/geist-mono', './src/styles/kito.css'],
 			description: 'Semantic version control for swarms of AI agents.',
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/KitoOrg/kito' }],
 			editLink: { baseUrl: 'https://github.com/KitoOrg/kito-website/edit/main/' },
