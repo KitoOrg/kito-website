@@ -151,7 +151,7 @@ kito-server init /srv/kito
 kito-server --dir /srv/kito repo add shop --from /path/to/a/git/repository
 kito-server --dir /srv/kito repo set shop --check "npm test" --push origin
 kito-server --dir /srv/kito repo set shop --approvals 1
-kito-server --dir /srv/kito user add bob --role write
+kito-server --dir /srv/kito user add bob --repo shop:write
 kito-server --dir /srv/kito serve
 ```
 
@@ -162,7 +162,7 @@ token once, and the whole `kito connect` line. Each person connects a
 directory of their own, where `kito` then works as it does in a repository:
 
 ```bash
-kito connect host:7421 shop --token kito_... --fingerprint sha256:...
+kito connect kito.example.com/shop   # signs you in in the browser
 ```
 
 People have roles. `read` sees and follows. `write` opens lanes and works

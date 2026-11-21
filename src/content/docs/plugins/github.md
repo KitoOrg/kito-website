@@ -85,7 +85,7 @@ renamed. In a browser, `https://<the server>/-/sign-in/github` goes to
 GitHub and comes back signed in. From the command line:
 
 ```bash
-kito connect kito.example.com:7421 shop --sign-in github --fingerprint sha256:…
+kito connect kito.example.com/shop
 ```
 
 ```text

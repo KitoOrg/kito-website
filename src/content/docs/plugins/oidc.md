@@ -55,7 +55,7 @@ People are added with `kito-server user add <name> --identity oidc:<their email>
 They then connect:
 
 ```bash
-kito connect kito.example.com:7421 shop --sign-in oidc --fingerprint sha256:…
+kito connect kito.example.com/shop
 ```
 
 ```text

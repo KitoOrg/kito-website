@@ -47,33 +47,45 @@ kito-server --dir /srv/kito repo set shop --approvals 1
 
 Each person is added with a role:
 
-| Role | What it lets a person do |
+| Role in a repository | What it lets a person do |
 | --- | --- |
 | `read` | See lanes and follow them |
-| `write` | Open lanes and work in them |
+| `write` | Open lanes and work in them; their integrations wait |
 | `integrate` | Bring lanes into the main lane |
+| `maintain` | Change the repository's rules, and say who uses it |
+
+A person has a role in each repository they may use, and nothing in the
+others. On the server itself they are a `member` (the repositories given
+them), an `admin` (every repository, the people, the plugins) or an
+`owner` (as an admin, and names admins and owners).
 
 ```bash
-kito-server --dir /srv/kito user add ada --email ada@example.com
-kito-server --dir /srv/kito user add bob --role write
-kito-server --dir /srv/kito user role bob integrate --repo shop
+kito-server --dir /srv/kito user add ada --role admin
+kito-server --dir /srv/kito user add bob --repo shop:write
+kito-server --dir /srv/kito grant bob shop integrate
+kito-server --dir /srv/kito revoke bob shop
 ```
 
 `user add` prints the person's token once, with the whole `kito connect`
 line they need. The server keeps only what the token hashes to, so pass it
-on when it is printed. `--repo <name>` limits a person to some
-repositories, and `--role` says what they may do there.
+on when it is printed. `--repo shop` alone gives `write`.
+
+Maintainers and admins do the same from a connected directory:
+
+```bash
+kito members            # who may use this repository, and as what
+kito grant carol read
+kito revoke carol
+kito people             # admins: everybody on the server
+kito people add dave    # prints the token once
+```
 
 A lane asked for by somebody who may write is merged and checked at once,
 then waits for its approvals and for somebody who may integrate to run
 `kito integrate <lane>`.
 
-Administrators of the server manage its plugins from a browser, on a page
-of the web client:
-
-```bash
-kito-server --dir /srv/kito user admin ada
-```
+Admins of the server also manage its plugins from a browser, on a page of
+the web client.
 
 People can sign in with GitHub or with your organization's OpenID Connect
 sign-on instead of a token. The plugin says who somebody is. The server
@@ -81,7 +93,7 @@ still says what they may do. Such a person is added by their identity, and
 gets no token:
 
 ```bash
-kito-server --dir /srv/kito user add bob --identity github:bob --role write
+kito-server --dir /srv/kito user add bob --identity github:bob --repo shop:write
 ```
 
 See [GitHub](../../plugins/github/) and [OpenID Connect](../../plugins/oidc/)
@@ -143,18 +155,22 @@ Each person connects a directory of their own to a repository. The files
 of the main lane come into it and are kept as the server has them:
 
 ```bash
-kito connect kito.example.com:7421 shop --token kito_... --fingerprint sha256:...
+kito connect kito.example.com/shop
 ```
 
-With GitHub or OpenID Connect, instead of a token:
+`kito clone` is the same command. Kito asks the server how you can sign
+in: with GitHub or OpenID Connect your browser opens, and you confirm it
+there; or you paste the token `user add` printed. A server with a
+certificate of its own shows its fingerprint once, for you to compare
+with `kito-server fingerprint`; one from a public authority is known by
+its name.
+
+The session lasts thirty days. `kito sign-in` gets another. In a script,
+say everything on the command line:
 
 ```bash
-kito connect kito.example.com:7421 shop --sign-in github --fingerprint sha256:...
+kito connect kito.example.com:7421/shop --token kito_... --fingerprint sha256:...
 ```
-
-The session lasts thirty days. `kito sign-in` gets another. For a server
-with a certificate from a public authority, use `--authority` instead of
-`--fingerprint`.
 
 SSH is another way in (`kito connect ssh://ada@kito.example.com/srv/kito shop`),
 where each key in `authorized_keys` has a forced command that names its
@@ -189,7 +205,7 @@ kito-server --dir /srv/kito plugin enable web
   its approvals set with `repo set`.
 - Each person is added with the role they need, and has their token or
   signs in with GitHub or OpenID Connect.
-- At least one administrator is named with `user admin`.
+- At least one admin is named with `user role <name> admin`.
 - The server is served with `--listen`, and with `--http` for the web
   client, and runs as a service.
 - Everybody has the fingerprint, or the server has a certificate from a

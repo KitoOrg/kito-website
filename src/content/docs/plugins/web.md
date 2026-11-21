@@ -80,8 +80,8 @@ or with the token the server gave them. They land on what needs them,
 across the repositories they may use, and choose a repository from there
 (`?repo=shop`). The client asks the server itself about a repository
 (`/-/api/<repository>`), as the person: the plugin only hands out the
-client's files. The server's administrators
-(`kito-server user admin <name>`) also get a page of the server's plugins:
+client's files. The server's admins
+(`kito-server user role <name> admin`) also get a page of the server's plugins:
 install, enable, disable and remove.
 
 ## Limits
