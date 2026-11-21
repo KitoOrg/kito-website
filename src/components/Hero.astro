@@ -141,8 +141,13 @@
 	.legend .zc {
 		background: var(--k-zc);
 	}
+	/* One line, always the same height: what it says changes, the page does not move. */
 	.ticker {
-		min-height: 1.6em;
+		height: 1.6em;
+		line-height: 1.6em;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 		margin: 0.35rem 0 0 8%;
 		font: 0.78rem var(--sl-font-mono);
 		color: var(--k-soft);
