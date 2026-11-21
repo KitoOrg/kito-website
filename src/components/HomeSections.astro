@@ -1,6 +1,66 @@
 ---
 // The rest of the home page, under the map: the web client, merging, why,
 // the life of a change, what was measured, and what it works with.
+// The assistants, each as it is set up, what it gets, and how its lane looks.
+const assistants = [
+	{
+		id: 'cc', mark: 'CC', name: 'Claude Code', how: 'set up by kito init',
+		setup: ['kito init'],
+		gets: [
+			'Kito\'s tools through its MCP server, and the rules in <code>CLAUDE.md</code>',
+			'Hooks that hold every edit to its lane and scope, and tell it why before it changes a line',
+			'Its model, said when a session starts, shown on its lane',
+		],
+		model: 'claude-opus-5', lane: { id: 'lane/14', agent: 'alice for ada', why: 'prices in cents' },
+		href: '/getting-started/claude-code/', link: 'With Claude Code',
+	},
+	{
+		id: 'cx', mark: 'Cx', name: 'Codex', how: 'the kito-codex plugin',
+		setup: ['kito plugin add codex', 'kito plugin enable codex', 'kito assistant add codex'],
+		gets: [
+			'Kito\'s tools in <code>.codex/config.toml</code>, and the rules in <code>AGENTS.md</code>',
+			'A hook that reads every patch before it is applied, and refuses it if Kito says no',
+			'Its model, from every hook, shown on its lane',
+		],
+		model: 'gpt-5-codex', lane: { id: 'lane/15', agent: 'bob for ada', why: 'a receipt for every sale' },
+		href: '/plugins/codex/', link: 'The Codex plugin',
+	},
+	{
+		id: 'zc', mark: 'Zc', name: 'ZCode', how: 'the kito-zcode plugin',
+		setup: ['kito plugin add zcode', 'kito plugin enable zcode', 'kito assistant add zcode', 'kito zcode hooks install'],
+		gets: [
+			'Kito\'s tools in <code>.zcode/config.json</code>, and the rules in <code>AGENTS.md</code>',
+			'Hooks before it writes a file and after a shell command',
+			'Its name on every lane it works in',
+		],
+		model: 'ZCode', lane: { id: 'lane/12', agent: 'erin for bob', why: 'a discount never below zero' },
+		href: '/plugins/zcode/', link: 'The ZCode plugin',
+	},
+	{
+		id: 'mcp', mark: '∗', name: 'Any MCP client', how: 'through kito-mcp',
+		setup: ['kito init', '# then add kito-mcp to its MCP servers'],
+		gets: [
+			'Kito\'s tools: open a lane, declare its scope, ask why, integrate',
+			'The rules, checked again when its lane is integrated',
+			'Its name, as it introduces itself to the server, on its lane',
+		],
+		model: 'the model it says', lane: { id: 'lane/16', agent: 'gus for carol', why: 'stock counted every night' },
+		href: '/getting-started/first-steps/', link: 'First steps',
+	},
+];
+
+// What plugins add that Kito does not do itself.
+const plugins = [
+	{ name: 'Web client', what: 'Lanes, reviews and why, in a browser; for a team behind a server.', program: 'kito-web', href: '/plugins/web/',
+		glyph: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="15" rx="2"/><path d="M3 8.5h18M7 6.3h.01M9.5 6.3h.01"/></svg>' },
+	{ name: 'GitHub', what: 'Sign in with GitHub, and its issues as the tasks of lanes.', program: 'kito-github', href: '/plugins/github/',
+		glyph: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v4.5l3 2"/></svg>' },
+	{ name: 'OpenID Connect', what: 'Sign in with the provider your organization already has.', program: 'kito-oidc', href: '/plugins/oidc/',
+		glyph: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="14" r="4"/><path d="M11 11l8-8M16 6l2 2M14 8l2 2"/></svg>' },
+	{ name: 'Kitchen', what: 'A team\'s shared rules, concepts, recipes and tools, for every agent.', program: 'kito-kitchen', href: '/plugins/kitchen/',
+		glyph: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11h14v3a7 7 0 0 1-14 0z"/><path d="M9 7c0-1.5 1-1.5 1-3M14 7c0-1.5 1-1.5 1-3"/></svg>' },
+];
+
 const code: [string, string][] = [
 	['a', 'export function total(prices: number[]): number {'],
 	['a', '  let sum = 0;'],
@@ -91,22 +151,47 @@ const code: [string, string][] = [
 		<p class="more"><a href="/guide/why-faster/">What was measured, and what was not →</a></p>
 	</section>
 
-	<section>
+	<section class="works">
 		<p class="kicker">Works with</p>
 		<h2>The assistants you already run.</h2>
-		<p class="sub">Each lane says which one works in it, and on what model. Plugins add the rest.</p>
-		<div class="with">
-			<a class="w" href="/getting-started/claude-code/"><span class="mk cc">CC</span><span>Claude Code<small>set up by kito init</small></span></a>
-			<a class="w" href="/plugins/codex/"><span class="mk cx">Cx</span><span>Codex<small>kito-codex</small></span></a>
-			<a class="w" href="/plugins/zcode/"><span class="mk zc">Zc</span><span>ZCode<small>kito-zcode</small></span></a>
-			<span class="w"><span class="mk">∗</span><span>Anything that speaks MCP<small>kito-mcp</small></span></span>
+		<p class="sub">Kito does not replace your coding assistant: it gives it a lane, the rules, and the reasons behind the code. Every lane says which assistant works in it, and on what model.</p>
+		<div class="assist">
+			<div class="pick" role="tablist" aria-label="Assistants">
+				{assistants.map((one, i) => (
+					<button type="button" role="tab" id={`as-${one.id}`} aria-controls={`ap-${one.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-tab={one.id}>
+						<span class={`mk big ${one.id}`}>{one.mark}</span>
+						<span class="who"><b>{one.name}</b><small>{one.how}</small></span>
+					</button>
+				))}
+			</div>
+			{assistants.map((one, i) => (
+				<div class="card panel" role="tabpanel" id={`ap-${one.id}`} aria-labelledby={`as-${one.id}`} hidden={i !== 0}>
+					<p class="step">Set it up</p>
+					<pre class="term">{one.setup.map((line) => <span><b>$</b> {line}</span>)}</pre>
+					<p class="step">What it gets</p>
+					<ul class="gets">{one.gets.map((g) => <li set:html={g} />)}</ul>
+					<p class="step">On the board</p>
+					<div class="lane-row">
+						<span class="ring"></span>
+						<span class="grow"><span class="t">{one.lane.why}</span><span class="m"><span class="mono">{one.lane.id}</span> · <span class={`mk ${one.id}`}>{one.mark}</span> {one.lane.agent} · {one.model}</span></span>
+					</div>
+					<a class="more-link" href={one.href}>{one.link} →</a>
+				</div>
+			))}
 		</div>
-		<div class="with">
-			<a class="w" href="/plugins/web/"><span>Web client<small>kito-web</small></span></a>
-			<a class="w" href="/plugins/github/"><span>GitHub sign-in and issues<small>kito-github</small></span></a>
-			<a class="w" href="/plugins/oidc/"><span>OpenID Connect<small>kito-oidc</small></span></a>
-			<a class="w" href="/plugins/kitchen/"><span>A team's kitchen<small>kito-kitchen</small></span></a>
+
+		<h3 class="plug-title">And plugins for the rest</h3>
+		<div class="plugs">
+			{plugins.map((one) => (
+				<a class="card plug" href={one.href}>
+					<span class="glyph" aria-hidden="true" set:html={one.glyph} />
+					<b>{one.name}</b>
+					<span>{one.what}</span>
+					<small class="mono">{one.program}</small>
+				</a>
+			))}
 		</div>
+		<p class="more"><a href="/plugins/">Every plugin →</a></p>
 	</section>
 
 	<section class="end">
@@ -424,31 +509,176 @@ const code: [string, string][] = [
 		font: 0.72rem var(--sl-font-mono);
 		color: var(--k-faint);
 	}
-	.with {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.6rem;
-		margin-top: 0.6rem;
+	.assist {
+		display: grid;
+		grid-template-columns: minmax(0, 17rem) minmax(0, 1fr);
+		gap: 1.25rem;
+		align-items: start;
 	}
-	.w {
-		display: inline-flex;
+	.pick {
+		display: grid;
+		gap: 0.5rem;
+	}
+	.pick button {
+		display: flex;
+		gap: 0.8rem;
 		align-items: center;
-		gap: 0.6rem;
-		padding: 0.75rem 1rem;
+		width: 100%;
+		padding: 0.8rem 1rem;
+		text-align: left;
+		font: inherit;
+		color: var(--k-ink);
+		background: transparent;
 		border: 1px solid var(--k-line);
 		border-radius: 0.75rem;
+		cursor: pointer;
+	}
+	.pick button:hover {
+		border-color: var(--k-faint);
+	}
+	.pick button[aria-selected='true'] {
 		background: var(--k-panel);
-		color: var(--k-ink);
+		border-color: var(--k-accent);
+		box-shadow: inset 3px 0 0 var(--k-accent);
+	}
+	.pick button:focus-visible {
+		outline: 2px solid var(--k-accent);
+		outline-offset: 2px;
+	}
+	.who b {
+		display: block;
 		font-size: 0.95rem;
 	}
-	a.w:hover {
-		text-decoration: none;
-		border-color: var(--k-accent);
-	}
-	.w small {
+	.who small {
 		display: block;
 		font-size: 0.78rem;
 		color: var(--k-soft);
+	}
+	.mk.big {
+		width: 2rem;
+		height: 2rem;
+		border-radius: 0.5rem;
+		font-size: 0.8rem;
+		flex: none;
+	}
+	.panel {
+		padding: 1.25rem 1.4rem;
+	}
+	.step {
+		margin: 0 0 0.5rem;
+		font: 0.7rem var(--sl-font-mono);
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: var(--k-faint);
+	}
+	.step:not(:first-child) {
+		margin-top: 1.2rem;
+	}
+	.term {
+		background: var(--k-bg);
+		border: 1px solid var(--k-line);
+		border-radius: 0.5rem;
+		padding: 0.6rem 0;
+	}
+	.term span {
+		color: var(--k-ink);
+	}
+	.term b {
+		color: var(--k-accent);
+		font-weight: 500;
+	}
+	.gets {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: grid;
+		gap: 0.45rem;
+		font-size: 0.9rem;
+	}
+	.gets li {
+		position: relative;
+		margin: 0;
+		padding-left: 1.4rem;
+	}
+	.gets li::before {
+		content: '';
+		position: absolute;
+		left: 0.2rem;
+		top: 0.5em;
+		width: 0.55rem;
+		height: 0.55rem;
+		border-radius: 50%;
+		border: 2px solid var(--k-accent);
+	}
+	.gets :global(code) {
+		font-size: 0.8rem;
+		background: var(--k-hover);
+		padding: 0.05rem 0.3rem;
+		border-radius: 0.25rem;
+	}
+	.lane-row {
+		display: flex;
+		gap: 0.75rem;
+		align-items: flex-start;
+		padding: 0.7rem 0.9rem;
+		border: 1px solid var(--k-line);
+		border-radius: 0.5rem;
+		font-size: 0.875rem;
+	}
+	.lane-row .grow {
+		display: grid;
+	}
+	.more-link {
+		display: inline-block;
+		margin-top: 1.1rem;
+		font-size: 0.9rem;
+	}
+	.plug-title {
+		margin: 3rem 0 1rem;
+		padding: 0;
+		border: 0;
+		font-size: 1.15rem;
+	}
+	.plugs {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 0.9rem;
+	}
+	.plug {
+		display: grid;
+		align-content: start;
+		gap: 0.35rem;
+		padding: 1.1rem 1.15rem;
+		color: var(--k-ink);
+		transition: border-color 0.15s, transform 0.15s;
+	}
+	a.plug:hover {
+		text-decoration: none;
+		border-color: var(--k-accent);
+		transform: translateY(-2px);
+	}
+	.plug .glyph {
+		width: 2.2rem;
+		height: 2.2rem;
+		padding: 0.45rem;
+		margin-bottom: 0.35rem;
+		border-radius: 0.55rem;
+		background: var(--k-hover);
+		color: var(--k-accent);
+	}
+	.plug .glyph :global(svg) {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+	.plug span:not(.glyph) {
+		font-size: 0.85rem;
+		color: var(--k-soft);
+	}
+	.plug small {
+		margin-top: 0.3rem;
+		font-size: 0.72rem;
+		color: var(--k-faint);
 	}
 	.end {
 		text-align: center;
@@ -495,6 +725,15 @@ const code: [string, string][] = [
 		cursor: pointer;
 	}
 	@media (max-width: 56rem) {
+		.assist {
+			grid-template-columns: minmax(0, 1fr);
+		}
+		.pick {
+			grid-template-columns: 1fr 1fr;
+		}
+		.plugs {
+			grid-template-columns: 1fr 1fr;
+		}
 		.split,
 		.two,
 		.nums {
@@ -531,4 +770,25 @@ const code: [string, string][] = [
 		const first = code.querySelector<HTMLElement>('[data-r="b"]');
 		if (first) say(first);
 	}
+	// The assistants, as tabs: one panel at a time; arrows move between them.
+	const tabs = [...document.querySelectorAll<HTMLButtonElement>('[data-tab]')];
+	const choose = (tab: HTMLButtonElement, focus = false) => {
+		for (const other of tabs) {
+			const on = other === tab;
+			other.setAttribute('aria-selected', String(on));
+			other.tabIndex = on ? 0 : -1;
+			const panel = document.getElementById(other.getAttribute('aria-controls') ?? '');
+			if (panel) panel.hidden = !on;
+		}
+		if (focus) tab.focus();
+	};
+	tabs.forEach((tab, i) => {
+		tab.addEventListener('click', () => choose(tab));
+		tab.addEventListener('keydown', (event) => {
+			const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[event.key];
+			if (!step) return;
+			event.preventDefault();
+			choose(tabs[(i + step + tabs.length) % tabs.length], true);
+		});
+	});
 </script>
