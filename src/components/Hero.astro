@@ -1,0 +1,313 @@
+---
+// The top of the home page: what Kito is, how to install it, and a map of
+// what it does. Each lane is an agent, coloured by the assistant it runs
+// in; it leaves the main lane, works on its own track and comes back at a
+// checkpoint. One waits for a person. The map runs off the page.
+---
+
+<div class="home-hero not-content">
+	<div class="copy">
+		<h1 id="_top">Dozens of agents.<br /><span>One repository.</span></h1>
+		<p class="lead">Kito is version control that merges their work function by function, and keeps the reason with the code.</p>
+		<div class="cmd"><code><b>$</b> curl -fsSL https://kito.sh/install.sh | sh</code><button type="button" data-copy="curl -fsSL https://kito.sh/install.sh | sh">Copy</button></div>
+		<div class="links">
+			<a href="/guide/using-kito/">Get started →</a>
+			<a href="/guide/lifecycle/">How a change lives →</a>
+			<a href="/guide/why-faster/">Why it is faster →</a>
+		</div>
+	</div>
+	<div class="art">
+		<svg class="map" data-lanes viewBox="0 0 1000 360" role="img" aria-label="Agents, coloured by the assistant they run in, each leave the main lane into a lane of their own, work side by side, and come back into it one after another; one waits for a person"></svg>
+		<div class="legend" aria-hidden="true"><span><i class="cc"></i>Claude Code</span><span><i class="cx"></i>Codex</span><span><i class="zc"></i>ZCode</span></div>
+		<p class="ticker" data-ticker aria-live="polite"></p>
+	</div>
+</div>
+
+<style>
+	.home-hero {
+		position: relative;
+		display: grid;
+		grid-template-columns: minmax(0, 32rem) minmax(0, 1fr);
+		align-items: center;
+		gap: 0.6rem;
+		min-height: 34rem;
+		padding-block: 2rem 1rem;
+	}
+	.home-hero::before {
+		content: '';
+		position: absolute;
+		inset: -6rem -40vw -2rem -10vw;
+		z-index: -1;
+		background: radial-gradient(56rem 30rem at 72% 45%, var(--k-glow), transparent 66%);
+		pointer-events: none;
+	}
+	h1 {
+		font-size: clamp(2.4rem, 5.2vw, 4.1rem);
+		line-height: 1.02;
+		letter-spacing: -0.04em;
+		font-weight: 800;
+		margin: 0 0 1rem;
+		color: var(--k-ink);
+	}
+	h1 span {
+		color: var(--k-accent);
+	}
+	.lead {
+		margin: 0 0 1.5rem;
+		color: var(--k-soft);
+		font-size: clamp(1.05rem, 1.7vw, 1.2rem);
+		line-height: 1.55;
+	}
+	.cmd {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		max-width: 100%;
+		font: 0.95rem var(--sl-font-mono);
+		background: var(--k-panel);
+		border: 1px solid var(--k-line);
+		border-radius: 0.6rem;
+		padding: 0.5rem 0.5rem 0.5rem 1rem;
+	}
+	.cmd code {
+		overflow-x: auto;
+		white-space: nowrap;
+		scrollbar-width: none;
+		background: none;
+		padding: 0;
+		color: var(--k-ink);
+	}
+	.cmd b {
+		color: var(--k-accent);
+		font-weight: 500;
+	}
+	.cmd button {
+		flex: none;
+		font: 500 0.8rem var(--sl-font);
+		border: 0;
+		border-radius: 0.45rem;
+		background: var(--k-accent);
+		color: var(--k-accent-ink);
+		padding: 0.4rem 0.75rem;
+		cursor: pointer;
+	}
+	.links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem 1.4rem;
+		margin-top: 1.25rem;
+		font-size: 0.95rem;
+	}
+	.links a {
+		color: var(--k-accent);
+		text-decoration: none;
+	}
+	.links a:hover {
+		text-decoration: underline;
+	}
+	.art {
+		min-width: 0;
+	}
+	.map {
+		display: block;
+		width: 135%;
+		height: auto;
+		overflow: visible;
+	}
+	.legend {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		margin: 0.1rem 0 0 8%;
+		font: 0.75rem var(--sl-font-mono);
+		color: var(--k-soft);
+	}
+	.legend span {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+	.legend i {
+		width: 1.25rem;
+		height: 0.25rem;
+		border-radius: 2px;
+	}
+	.legend .cc {
+		background: var(--k-cc);
+	}
+	.legend .cx {
+		background: var(--k-cx);
+	}
+	.legend .zc {
+		background: var(--k-zc);
+	}
+	.ticker {
+		min-height: 1.6em;
+		margin: 0.35rem 0 0 8%;
+		font: 0.78rem var(--sl-font-mono);
+		color: var(--k-soft);
+		transition: opacity 0.4s;
+	}
+	.ticker :global(i) {
+		font-style: normal;
+		color: var(--k-accent);
+	}
+	.map :global(.lane) {
+		fill: none;
+		stroke-width: 4;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+	.map :global(.lane.wait) {
+		stroke-dasharray: 2 7;
+	}
+	.map :global(.main) {
+		fill: none;
+		stroke: var(--k-accent);
+		stroke-width: 5;
+		stroke-linecap: round;
+		filter: drop-shadow(0 0 8px var(--k-glow-line));
+	}
+	.map :global(.node) {
+		fill: var(--k-bg);
+		stroke: var(--k-accent);
+		stroke-width: 3;
+	}
+	.map :global(.node.wait) {
+		stroke: var(--k-amber);
+	}
+	.map :global(.fork) {
+		fill: var(--k-bg);
+		stroke: var(--k-accent);
+		stroke-width: 2;
+	}
+	.map :global(.chip rect) {
+		fill: var(--k-panel);
+		stroke: var(--k-line);
+		stroke-width: 1;
+	}
+	.map :global(.chip .mk) {
+		font: 700 10px var(--sl-font);
+	}
+	.map :global(.chip .nm) {
+		font: 600 12.5px var(--sl-font);
+		fill: var(--k-ink);
+	}
+	.map :global(.why) {
+		font: 11.5px var(--sl-font-mono);
+		fill: var(--k-soft);
+		paint-order: stroke;
+		stroke: var(--k-bg);
+		stroke-width: 11px;
+		stroke-linejoin: round;
+	}
+	.map :global(.why.wait) {
+		fill: var(--k-amber);
+	}
+	@media (max-width: 56rem) {
+		.home-hero {
+			grid-template-columns: minmax(0, 1fr);
+			min-height: 0;
+		}
+		.map {
+			width: 100%;
+		}
+		.map :global(.why) {
+			display: none;
+		}
+		.legend,
+		.ticker {
+			margin-left: 0;
+		}
+	}
+</style>
+
+<script>
+	// The map, drawn from a list of lanes: on its own track, out of the main
+	// lane and back. Each save moves along at one pace.
+	const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const MAIN = 180;
+	const END = 1500;
+	const PACE = 85;
+	const SVG = 'http://www.w3.org/2000/svg';
+	// The track, where it leaves, where it comes back, who, in what, why.
+	const LANES: [number, number, number, string, 'CC' | 'Cx' | 'Zc', string, string?][] = [
+		[30, 40, 900, 'carol', 'CC', 'taxes on every total'],
+		[75, 170, 700, 'bob', 'Cx', 'a receipt for every sale'],
+		[120, 300, 560, 'alice', 'CC', 'prices in cents'],
+		[330, 90, 840, 'gus', 'Zc', 'stock counted every night'],
+		[285, 210, 520, 'erin', 'Cx', 'a discount never below zero'],
+		[240, 570, 800, 'dana', 'CC', 'waits for ada', 'wait'],
+	];
+	const ink = { CC: 'var(--k-cc)', Cx: 'var(--k-cx)', Zc: 'var(--k-zc)' };
+
+	for (const map of document.querySelectorAll<SVGSVGElement>('[data-lanes]')) {
+		let lanes = '';
+		let nodes = '';
+		let chips = '';
+		let saves = '';
+		for (const [y, from, to, name, mark, why, state] of LANES) {
+			const rise = Math.abs(y - MAIN);
+			const waits = state === 'wait';
+			const [a, b] = [from + rise, to - rise];
+			const open = `M${from} ${MAIN}L${a} ${y}L${b} ${y}`;
+			const back = `L${to} ${MAIN}`;
+			const colour = `style="stroke:${ink[mark]}"`;
+			lanes += `<path class="lane" ${colour} d="${waits ? open : open + back}"/>`;
+			if (waits) lanes += `<path class="lane wait" ${colour} d="M${b} ${y}${back}"/>`;
+			nodes += `<circle class="fork" cx="${from}" cy="${MAIN}" r="4"/>`;
+			nodes += waits ? `<circle class="node wait" cx="${b}" cy="${y}" r="6.5"/>` : `<circle class="node" cx="${to}" cy="${MAIN}" r="6.5"/>`;
+			const x = a + 10;
+			const wide = 34 + name.length * 7.6;
+			chips += `<g class="chip"><rect x="${x}" y="${y - 12}" width="${wide}" height="24" rx="12"/><text class="mk" x="${x + 9}" y="${y + 3.5}" style="fill:${ink[mark]}">${mark}</text><text class="nm" x="${x + 27}" y="${y + 4}">${name}</text></g>`;
+			if (b - (x + wide) - 26 > why.length * 6.9) {
+				chips += `<text class="why${waits ? ' wait' : ''}" x="${x + wide + 10}" y="${y + 4}">${waits ? why : `“${why}”`}</text>`;
+			} else if (waits) {
+				chips += `<text class="why wait" x="${b}" y="${y + 26}" text-anchor="middle">${why}</text>`;
+			}
+			if (!still) saves += `<circle class="save" r="4" opacity="0" style="fill:${ink[mark]}" data-path="${waits ? open : `${open}${back}L${END} ${MAIN}`}"/>`;
+		}
+		map.innerHTML = `${lanes}<path class="main" d="M20 ${MAIN}H${END}"/>${saves}${nodes}${chips}`;
+		map.querySelectorAll<SVGCircleElement>('.save').forEach((dot, n) => {
+			const probe = document.createElementNS(SVG, 'path');
+			probe.setAttribute('d', dot.dataset.path ?? '');
+			const dur = probe.getTotalLength() / PACE;
+			const begin = n * 1.7;
+			dot.innerHTML = `<animateMotion dur="${dur}s" begin="${begin}s" repeatCount="indefinite" path="${dot.dataset.path}"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.04;.94;1" dur="${dur}s" begin="${begin}s" repeatCount="indefinite"/>`;
+		});
+	}
+
+	// What happens, one line at a time, under the map.
+	const said = [
+		'<i>lane/14</i> · alice · Claude Code, claude-opus-5 · integrated as ckpt#32',
+		'<i>lane/15</i> · bob · Codex, gpt-5-codex · opened: “a receipt for every sale”',
+		'<i>lane/9</i> · dana · Claude Code · waits for ada',
+		'<i>lane/12</i> · erin · ZCode · merged with main, no conflict',
+		'<i>lane/16</i> · gus · ZCode · told why before it edits src/stock.ts:count',
+	];
+	for (const line of document.querySelectorAll<HTMLElement>('[data-ticker]')) {
+		let at = 0;
+		const next = () => {
+			line.style.opacity = '0';
+			setTimeout(() => {
+				line.innerHTML = said[at];
+				line.style.opacity = '1';
+				at = (at + 1) % said.length;
+			}, still ? 0 : 400);
+		};
+		next();
+		if (!still) setInterval(next, 3000);
+	}
+
+	for (const button of document.querySelectorAll<HTMLButtonElement>('[data-copy]')) {
+		button.addEventListener('click', async () => {
+			try {
+				await navigator.clipboard.writeText(button.dataset.copy ?? '');
+				button.textContent = 'Copied';
+			} catch {
+				button.textContent = 'Select it';
+			}
+			setTimeout(() => (button.textContent = 'Copy'), 1600);
+		});
+	}
+</script>

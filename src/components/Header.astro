@@ -1,0 +1,102 @@
+---
+// The site's top bar, on every page: the mark and its version, the parts
+// of the documentation, search, GitHub and the theme.
+import Search from 'virtual:starlight/components/Search';
+import SiteTitle from 'virtual:starlight/components/SiteTitle';
+import SocialIcons from 'virtual:starlight/components/SocialIcons';
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+
+// Kito's version, as the download page gives it.
+const VERSION = '0.25';
+const here = Astro.url.pathname;
+const parts = [
+	{ href: '/guide/using-kito/', label: 'Guide', under: '/guide/' },
+	{ href: '/concepts/lanes/', label: 'Concepts', under: '/concepts/' },
+	{ href: '/plugins/', label: 'Plugins', under: '/plugins/' },
+];
+---
+
+<div class="header">
+	<div class="left">
+		<div class="title"><SiteTitle /></div>
+		<a class="version" href="/download/" title="The latest release">{VERSION}</a>
+		<nav class="parts" aria-label="Parts of the site">
+			{parts.map((part) => <a href={part.href} aria-current={here.startsWith(part.under) ? 'page' : undefined}>{part.label}</a>)}
+		</nav>
+	</div>
+	<div class="search print:hidden"><Search /></div>
+	<div class="right print:hidden">
+		<SocialIcons />
+		<ThemeSelect />
+	</div>
+</div>
+
+<style>
+	.header {
+		display: flex;
+		align-items: center;
+		gap: 1.25rem;
+		height: 100%;
+	}
+	.left {
+		display: flex;
+		align-items: center;
+		gap: 0.9rem;
+		min-width: 0;
+	}
+	.title {
+		min-width: 0;
+		overflow: clip;
+		padding: 0.25rem;
+		margin: -0.25rem;
+	}
+	.version {
+		font: 0.75rem var(--sl-font-mono);
+		color: var(--sl-color-gray-3);
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 999px;
+		padding: 0.1rem 0.55rem;
+		text-decoration: none;
+	}
+	.parts {
+		display: none;
+		gap: 1.4rem;
+		margin-left: 0.6rem;
+		font-size: var(--sl-text-sm);
+	}
+	.parts a {
+		color: var(--sl-color-gray-2);
+		text-decoration: none;
+	}
+	.parts a:hover,
+	.parts a[aria-current='page'] {
+		color: var(--sl-color-white);
+	}
+	.parts a[aria-current='page'] {
+		font-weight: 600;
+	}
+	.search {
+		display: flex;
+		flex: 1;
+		justify-content: flex-end;
+	}
+	.right {
+		display: none;
+		align-items: center;
+		gap: 1rem;
+	}
+	@media (min-width: 50rem) {
+		.parts,
+		.right {
+			display: flex;
+		}
+		.search :global(site-search) {
+			width: min(20rem, 100%);
+		}
+	}
+	@media (max-width: 30rem) {
+		.version {
+			display: none;
+		}
+	}
+</style>

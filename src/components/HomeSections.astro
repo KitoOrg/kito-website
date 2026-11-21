@@ -1,0 +1,534 @@
+---
+// The rest of the home page, under the map: the web client, merging, why,
+// the life of a change, what was measured, and what it works with.
+const code: [string, string][] = [
+	['a', 'export function total(prices: number[]): number {'],
+	['a', '  let sum = 0;'],
+	['a', '  for (const price of prices) {'],
+	['b', '    sum += Math.round(price * 100);'],
+	['a', '  }'],
+	['a', '  return sum;'],
+	['a', '}'],
+	['', ' '],
+	['c', 'export function discount(amount: number, percent: number) {'],
+	['c', '  return Math.max(0, amount - (amount * percent) / 100);'],
+	['c', '}'],
+];
+---
+
+<div class="home not-content">
+	<section class="split">
+		<div>
+			<p class="kicker">One person, many agents</p>
+			<h2>What needs you comes first.</h2>
+			<p class="sub">The web client opens on what is stopped until a person acts: a conflict to decide, a review, a lane that waits to go in. The rest keeps moving.</p>
+			<a href="/plugins/web/">The web client →</a>
+		</div>
+		<div class="card window" aria-label="The web client, opened on what needs you">
+			<div class="bar"><i></i><i></i><i></i><span>kito.acme.dev · Needs you · 3</span></div>
+			<div class="item"><span class="ring bad"></span><div class="grow"><div class="t">prices in cents</div><div class="m"><span class="mono">shop · lane/2</span> · <span class="mk cc">CC</span> alice for ada · 1 conflict to decide</div></div><span class="tag bad">conflict</span></div>
+			<div class="item"><span class="ring"></span><div class="grow"><div class="t">a discount never takes more than the price</div><div class="m"><span class="mono">shop · lane/5</span> · <span class="mk zc">Zc</span> erin for bob · asks to go in</div></div><span class="tag ok">integrate</span></div>
+			<div class="item"><span class="ring warn"></span><div class="grow"><div class="t">chapters in the order they are read</div><div class="m"><span class="mono">books · lane/1</span> · <span class="mk cx">Cx</span> frank · asks for your review</div></div><span class="tag warn">review</span></div>
+		</div>
+	</section>
+
+	<section>
+		<p class="kicker">Merging</p>
+		<h2>Two agents, one file. Git stops. Kito does not.</h2>
+		<p class="sub">Alice adds a tax, Bob adds a receipt: two new functions, both at the end of the same file. Neither touched what the other wrote.</p>
+		<div class="two">
+			<div class="card">
+				<h3>With git <span class="tag bad">conflict</span></h3>
+				<pre><span>export function total(prices) &#123; … &#125;</span><span> </span><span class="mark">&lt;&lt;&lt;&lt;&lt;&lt;&lt; alice</span><span class="del">export function tax(amount) &#123; … &#125;</span><span class="mark">=======</span><span class="del">export function receipt(prices) &#123; … &#125;</span><span class="mark">&gt;&gt;&gt;&gt;&gt;&gt;&gt; bob</span></pre>
+				<p class="foot">Somebody stops, reads both, and keeps both by hand.</p>
+			</div>
+			<div class="card">
+				<h3>With Kito <span class="tag ok">integrated</span></h3>
+				<pre><span>export function total(prices) &#123; … &#125;</span><span> </span><span class="add">export function tax(amount) &#123; … &#125;       alice</span><span> </span><span class="add">export function receipt(prices) &#123; … &#125;   bob</span><span> </span><span> </span></pre>
+				<p class="foot">Two functions were added. Nobody was asked.</p>
+			</div>
+		</div>
+		<p class="more"><a href="/concepts/merging/">Merging function by function →</a></p>
+	</section>
+
+	<section class="split">
+		<div class="card">
+			<h3 class="mono">src/shop.ts</h3>
+			<pre class="code" data-code>{code.map(([reason, text]) => <span data-r={reason || undefined} tabindex={reason ? 0 : undefined}>{text}</span>)}</pre>
+		</div>
+		<div>
+			<p class="kicker">Why</p>
+			<h2>Every line knows why it is there.</h2>
+			<p class="sub">The reason a line was written is kept with it, and told to the next agent before it changes it. Point at a line.</p>
+			<div class="card reason" data-reason aria-live="polite"></div>
+		</div>
+	</section>
+
+	<section>
+		<p class="kicker">The life of a change</p>
+		<h2>From a task to main, without a queue of pull requests.</h2>
+		<p class="sub">Six stops. A person is needed at the amber one, and only there.</p>
+		<ol class="stations">
+			<li><b>A lane</b><span>opened with its reason and what it will touch</span><small>open_lane</small></li>
+			<li><b>Told why</b><span>the reasons behind the code it declared</span><small>why</small></li>
+			<li><b>Work</b><span>held to its lane and its scope</span><small>hooks</small></li>
+			<li class="person"><b>Review</b><span>a person comments, approves, or asks for changes</span><small>kito lane approve</small></li>
+			<li><b>Merged, checked</b><span>function by function, with the checks on the result</span><small>kito integrate</small></li>
+			<li><b>A checkpoint</b><span>a git commit, with its reason kept</span><small>ckpt#32</small></li>
+		</ol>
+		<p class="more"><a href="/guide/lifecycle/">The life cycle of a change →</a></p>
+	</section>
+
+	<section>
+		<p class="kicker">Measured</p>
+		<h2>Numbers, and where they come from.</h2>
+		<p class="sub">Each was measured on one machine and is written down with how. None that was not.</p>
+		<div class="nums">
+			<div class="card num"><b>40 / 40</b><span>integrations merged by Kito, where git stopped on 36 of the same 40</span><small>the same merges, given to git · a test built around one case</small></div>
+			<div class="card num"><b>21–24 ms</b><span>to check an agent's edit against the rules, before it is made</span><small>the rules before an edit · 20,000 files</small></div>
+			<div class="card num"><b>2.1 s</b><span>median wait at the checks for ten agents at once, against 11.2 s one at a time</span><small>waiting at the checks · Kito against itself</small></div>
+		</div>
+		<p class="more"><a href="/guide/why-faster/">What was measured, and what was not →</a></p>
+	</section>
+
+	<section>
+		<p class="kicker">Works with</p>
+		<h2>The assistants you already run.</h2>
+		<p class="sub">Each lane says which one works in it, and on what model. Plugins add the rest.</p>
+		<div class="with">
+			<a class="w" href="/getting-started/claude-code/"><span class="mk cc">CC</span><span>Claude Code<small>set up by kito init</small></span></a>
+			<a class="w" href="/plugins/codex/"><span class="mk cx">Cx</span><span>Codex<small>kito-codex</small></span></a>
+			<a class="w" href="/plugins/zcode/"><span class="mk zc">Zc</span><span>ZCode<small>kito-zcode</small></span></a>
+			<span class="w"><span class="mk">∗</span><span>Anything that speaks MCP<small>kito-mcp</small></span></span>
+		</div>
+		<div class="with">
+			<a class="w" href="/plugins/web/"><span>Web client<small>kito-web</small></span></a>
+			<a class="w" href="/plugins/github/"><span>GitHub sign-in and issues<small>kito-github</small></span></a>
+			<a class="w" href="/plugins/oidc/"><span>OpenID Connect<small>kito-oidc</small></span></a>
+			<a class="w" href="/plugins/kitchen/"><span>A team's kitchen<small>kito-kitchen</small></span></a>
+		</div>
+	</section>
+
+	<section class="end">
+		<h2>Give every agent a lane.</h2>
+		<p class="sub">Git stays: every checkpoint is a git commit, and GitHub and CI keep working.</p>
+		<div class="cmd"><code><b>$</b> curl -fsSL https://kito.sh/install.sh | sh</code><button type="button" data-copy="curl -fsSL https://kito.sh/install.sh | sh">Copy</button></div>
+		<p class="more"><a href="/install/">Other ways to install →</a></p>
+	</section>
+</div>
+
+<style>
+	.home {
+		color: var(--k-ink);
+	}
+	section {
+		padding-block: 4.5rem;
+		border-top: 1px solid var(--k-line);
+	}
+	.split {
+		display: grid;
+		grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+		gap: 3rem;
+		align-items: center;
+	}
+	.kicker {
+		margin: 0 0 0.6rem;
+		font: 0.75rem var(--sl-font-mono);
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--k-accent);
+	}
+	h2 {
+		margin: 0 0 0.75rem;
+		font-size: clamp(1.75rem, 3.4vw, 2.6rem);
+		line-height: 1.08;
+		letter-spacing: -0.03em;
+		font-weight: 700;
+		color: var(--k-ink);
+	}
+	.sub {
+		margin: 0 0 2rem;
+		max-width: 40em;
+		color: var(--k-soft);
+	}
+	a {
+		color: var(--k-accent);
+		text-decoration: none;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+	.more {
+		margin: 1.25rem 0 0;
+		font-size: 0.9rem;
+	}
+	.mono {
+		font-family: var(--sl-font-mono);
+	}
+	.card {
+		background: var(--k-panel);
+		border: 1px solid var(--k-line);
+		border-radius: 0.9rem;
+		overflow: hidden;
+	}
+	h3 {
+		display: flex;
+		gap: 0.5rem;
+		align-items: center;
+		margin: 0;
+		padding: 0.7rem 1rem;
+		font-size: 0.85rem;
+		border-bottom: 1px solid var(--k-line);
+		color: var(--k-ink);
+	}
+	.window .bar {
+		display: flex;
+		gap: 0.5rem;
+		align-items: center;
+		padding: 0.55rem 0.9rem;
+		border-bottom: 1px solid var(--k-line);
+		font: 0.75rem var(--sl-font-mono);
+		color: var(--k-faint);
+	}
+	.window .bar i {
+		width: 0.6rem;
+		height: 0.6rem;
+		border-radius: 50%;
+		background: var(--k-line);
+	}
+	.window .bar span {
+		margin-left: 0.5rem;
+	}
+	.item {
+		display: flex;
+		gap: 0.75rem;
+		align-items: flex-start;
+		padding: 0.75rem 1rem;
+		font-size: 0.875rem;
+	}
+	.item + .item {
+		border-top: 1px solid var(--k-line);
+	}
+	.grow {
+		flex: 1;
+		min-width: 0;
+	}
+	.t {
+		font-weight: 600;
+	}
+	.m {
+		font-size: 0.78rem;
+		color: var(--k-soft);
+	}
+	.ring {
+		flex: none;
+		width: 1rem;
+		height: 1rem;
+		margin-top: 0.2rem;
+		border-radius: 50%;
+		border: 2px solid var(--k-ok);
+	}
+	.ring.warn {
+		border-color: var(--k-amber);
+	}
+	.ring.bad {
+		border-color: var(--k-bad);
+	}
+	.tag {
+		font: 600 0.7rem var(--sl-font-mono);
+		border-radius: 999px;
+		padding: 0.12rem 0.5rem;
+		white-space: nowrap;
+	}
+	.tag.bad {
+		background: var(--k-bad-bg);
+		color: var(--k-bad);
+	}
+	.tag.ok {
+		background: var(--k-ok-bg);
+		color: var(--k-ok);
+	}
+	.tag.warn {
+		background: var(--k-warn-bg);
+		color: var(--k-amber);
+	}
+	.mk {
+		display: inline-grid;
+		place-items: center;
+		width: 1.25rem;
+		height: 1.05rem;
+		border-radius: 0.3rem;
+		border: 1px solid var(--k-line);
+		font: 700 0.6rem var(--sl-font);
+		vertical-align: middle;
+	}
+	.mk.cc {
+		color: var(--k-cc);
+	}
+	.mk.cx {
+		color: var(--k-cx);
+	}
+	.mk.zc {
+		color: var(--k-zc);
+	}
+	.two {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.1rem;
+	}
+	pre {
+		margin: 0;
+		padding: 0.75rem 0;
+		font: 0.8rem/1.7 var(--sl-font-mono);
+		overflow-x: auto;
+		background: none;
+		border: 0;
+	}
+	pre span {
+		display: block;
+		padding: 0 1rem;
+		white-space: pre;
+	}
+	.del {
+		background: var(--k-bad-bg);
+		color: var(--k-bad);
+	}
+	.add {
+		background: var(--k-ok-bg);
+		color: var(--k-ok);
+	}
+	.mark {
+		color: var(--k-amber);
+	}
+	.foot {
+		margin: 0;
+		padding: 0.7rem 1rem;
+		border-top: 1px solid var(--k-line);
+		font-size: 0.85rem;
+		color: var(--k-soft);
+	}
+	.code span[data-r] {
+		cursor: pointer;
+		border-left: 3px solid var(--k-lane);
+	}
+	.code span[data-r='b'] {
+		border-left-color: var(--k-cc);
+	}
+	.code span[data-r='c'] {
+		border-left-color: var(--k-zc);
+	}
+	.code span:not([data-r]) {
+		border-left: 3px solid transparent;
+	}
+	.code span.on,
+	.code span[data-r]:hover {
+		background: var(--k-hover);
+	}
+	.reason {
+		padding: 1.25rem 1.4rem;
+	}
+	.reason :global(.q) {
+		margin: 0 0 0.6rem;
+		font-size: 1.35rem;
+		font-weight: 600;
+		letter-spacing: -0.01em;
+	}
+	.reason :global(dl) {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 0.3rem 1rem;
+		margin: 0;
+		font-size: 0.875rem;
+	}
+	.reason :global(dt) {
+		color: var(--k-soft);
+	}
+	.reason :global(dd) {
+		margin: 0;
+	}
+	.stations {
+		position: relative;
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		gap: 0.6rem;
+		margin: 0;
+		padding: 2.1rem 0 0;
+		list-style: none;
+	}
+	.stations::before {
+		content: '';
+		position: absolute;
+		left: 0.4rem;
+		right: 4%;
+		top: 0.7rem;
+		height: 4px;
+		border-radius: 2px;
+		background: var(--k-accent);
+	}
+	.stations li {
+		position: relative;
+		margin: 0;
+		font-size: 0.875rem;
+	}
+	.stations li::before {
+		content: '';
+		position: absolute;
+		top: -1.85rem;
+		left: 0;
+		width: 0.9rem;
+		height: 0.9rem;
+		border-radius: 50%;
+		background: var(--k-bg);
+		border: 3px solid var(--k-accent);
+	}
+	.stations li.person::before {
+		border-color: var(--k-amber);
+	}
+	.stations b {
+		display: block;
+		font-size: 0.95rem;
+		margin-bottom: 0.15rem;
+	}
+	.stations span {
+		color: var(--k-soft);
+	}
+	.stations small {
+		display: block;
+		margin-top: 0.4rem;
+		font: 0.7rem var(--sl-font-mono);
+		color: var(--k-faint);
+	}
+	.nums {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.1rem;
+	}
+	.num {
+		padding: 1.4rem;
+	}
+	.num b {
+		display: block;
+		font-size: 2.5rem;
+		line-height: 1.05;
+		letter-spacing: -0.03em;
+	}
+	.num span {
+		display: block;
+		margin-top: 0.4rem;
+		font-size: 0.875rem;
+		color: var(--k-soft);
+	}
+	.num small {
+		display: block;
+		margin-top: 0.6rem;
+		font: 0.72rem var(--sl-font-mono);
+		color: var(--k-faint);
+	}
+	.with {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6rem;
+		margin-top: 0.6rem;
+	}
+	.w {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.6rem;
+		padding: 0.75rem 1rem;
+		border: 1px solid var(--k-line);
+		border-radius: 0.75rem;
+		background: var(--k-panel);
+		color: var(--k-ink);
+		font-size: 0.95rem;
+	}
+	a.w:hover {
+		text-decoration: none;
+		border-color: var(--k-accent);
+	}
+	.w small {
+		display: block;
+		font-size: 0.78rem;
+		color: var(--k-soft);
+	}
+	.end {
+		text-align: center;
+		padding-block: 5.5rem;
+	}
+	.end h2 {
+		font-size: clamp(2rem, 4.6vw, 3.3rem);
+	}
+	.end .sub {
+		margin-inline: auto;
+		margin-bottom: 1.6rem;
+	}
+	.cmd {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		max-width: 100%;
+		font: 0.95rem var(--sl-font-mono);
+		background: var(--k-panel);
+		border: 1px solid var(--k-line);
+		border-radius: 0.6rem;
+		padding: 0.5rem 0.5rem 0.5rem 1rem;
+	}
+	.cmd code {
+		overflow-x: auto;
+		white-space: nowrap;
+		scrollbar-width: none;
+		background: none;
+		padding: 0;
+		color: var(--k-ink);
+	}
+	.cmd b {
+		color: var(--k-accent);
+		font-weight: 500;
+	}
+	.cmd button {
+		flex: none;
+		font: 500 0.8rem var(--sl-font);
+		border: 0;
+		border-radius: 0.45rem;
+		background: var(--k-accent);
+		color: var(--k-accent-ink);
+		padding: 0.4rem 0.75rem;
+		cursor: pointer;
+	}
+	@media (max-width: 56rem) {
+		.split,
+		.two,
+		.nums {
+			grid-template-columns: minmax(0, 1fr);
+		}
+		.stations {
+			grid-template-columns: 1fr 1fr;
+			row-gap: 2.6rem;
+		}
+		.stations::before {
+			display: none;
+		}
+	}
+</style>
+
+<script>
+	// A reason for each line: pointed at, it is said beside the code.
+	const reasons: Record<string, [string, string, string, string, string]> = {
+		a: ['first version', 'ada', '—', 'ckpt#1', 'three weeks ago'],
+		b: ['prices in cents', 'alice (Claude Code) for ada', 'lane/14', 'ckpt#31, approved by carol', 'two hours ago'],
+		c: ['a discount never takes more than the price', 'erin (ZCode) for bob', 'lane/5', 'not integrated yet', 'twenty minutes ago'],
+	};
+	const code = document.querySelector<HTMLElement>('[data-code]');
+	const box = document.querySelector<HTMLElement>('[data-reason]');
+	if (code && box) {
+		const say = (line: HTMLElement) => {
+			for (const other of code.children) other.classList.toggle('on', other === line);
+			const [why, who, lane, where, when] = reasons[line.dataset.r ?? 'a'];
+			box.innerHTML = `<p class="q">“${why}”</p><dl><dt>by</dt><dd>${who}</dd><dt>lane</dt><dd>${lane}</dd><dt>landed</dt><dd>${where}</dd><dt>when</dt><dd>${when}</dd></dl>`;
+		};
+		for (const line of code.querySelectorAll<HTMLElement>('[data-r]')) {
+			for (const event of ['mouseenter', 'focus', 'click']) line.addEventListener(event, () => say(line));
+		}
+		const first = code.querySelector<HTMLElement>('[data-r="b"]');
+		if (first) say(first);
+	}
+</script>

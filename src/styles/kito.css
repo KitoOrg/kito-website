@@ -14,10 +14,10 @@
 	--sl-color-gray-1: #eaeaf2;
 	--sl-color-gray-2: #c3c2d0;
 	--sl-color-gray-3: #9897a8;
-	--sl-color-gray-4: #5a596a;
-	--sl-color-gray-5: #2f2e3b;
-	--sl-color-gray-6: #1d1d26;
-	--sl-color-black: #15151c;
+	--sl-color-gray-4: #4f4d72;
+	--sl-color-gray-5: #2c2b4d;
+	--sl-color-gray-6: #191834;
+	--sl-color-black: #100f24;
 }
 
 :root[data-theme='light'] {
@@ -33,4 +33,80 @@
 	--sl-color-gray-6: #ececf4;
 	--sl-color-gray-7: #f6f6fa;
 	--sl-color-black: #ffffff;
+}
+
+/* The colours of the home page and of what draws lanes, in both themes:
+   the brand's indigo, the colour of each assistant, and what a lane's
+   state means (green open, amber waiting, red stopped). */
+:root {
+	--k-bg: #100f24;
+	--k-panel: #191834;
+	--k-ink: #f1f0fb;
+	--k-soft: #aeacc9;
+	--k-faint: #77759a;
+	--k-line: #2c2b4d;
+	--k-accent: #aaa5f7;
+	--k-accent-ink: #14122e;
+	--k-lane: #55537f;
+	--k-hover: rgba(170, 165, 247, 0.12);
+	--k-glow: #25226a;
+	--k-glow-line: rgba(170, 165, 247, 0.7);
+	--k-amber: #e9c46a;
+	--k-cc: #f0b35a;
+	--k-cx: #6fd6a0;
+	--k-zc: #86b4ff;
+	--k-ok: #9bd6a2;
+	--k-ok-bg: #18301c;
+	--k-bad: #f0aaa3;
+	--k-bad-bg: #3a1c1a;
+	--k-warn-bg: #3a3016;
+}
+
+:root[data-theme='light'] {
+	--k-bg: #ffffff;
+	--k-panel: #ffffff;
+	--k-ink: #1b1b24;
+	--k-soft: #5d5c6b;
+	--k-faint: #8f8ea0;
+	--k-line: #dcdbe8;
+	--k-accent: #4a41c4;
+	--k-accent-ink: #ffffff;
+	--k-lane: #a9a8c2;
+	--k-hover: rgba(74, 65, 196, 0.08);
+	--k-glow: #ecebfd;
+	--k-glow-line: rgba(74, 65, 196, 0.25);
+	--k-amber: #b07a00;
+	--k-cc: #c47a08;
+	--k-cx: #1f8a45;
+	--k-zc: #3a62c9;
+	--k-ok: #1c6b2a;
+	--k-ok-bg: #e2f2e2;
+	--k-bad: #9b2a20;
+	--k-bad-bg: #fbe6e3;
+	--k-warn-bg: #fbf0d4;
+}
+
+/* A map that runs off the page does not make the page scroll sideways. */
+body {
+	overflow-x: clip;
+}
+
+/* Headings as the home page sets them: tight, and a little heavier. */
+.sl-markdown-content :is(h1, h2, h3) {
+	letter-spacing: -0.02em;
+}
+h1#_top {
+	letter-spacing: -0.03em;
+	font-weight: 700;
+}
+
+/* The top bar, on the page's own colour, with a line under it. */
+header.header {
+	background: color-mix(in srgb, var(--sl-color-black) 88%, transparent);
+	backdrop-filter: blur(10px);
+}
+
+/* In dark, a little of the home page's light at the top of every page. */
+:root:not([data-theme='light']) body {
+	background: radial-gradient(60rem 22rem at 70% -6rem, rgba(37, 34, 106, 0.55), transparent 70%) no-repeat, var(--sl-color-black);
 }

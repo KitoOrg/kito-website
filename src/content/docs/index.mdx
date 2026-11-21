@@ -1,66 +1,12 @@
 ---
 title: Kito
-description: Semantic version control for swarms of AI agents.
+description: Version control for teams of AI agents. Dozens of agents work on one repository, each in a lane of its own, merged function by function, with the reason kept with the code.
 template: splash
+# The hero is drawn by src/components/Hero.astro: the map of lanes.
 hero:
-  tagline: Version control where dozens of agents work on one repository at once, and meet only real conflicts.
-  actions:
-    - text: Get started
-      link: getting-started/first-steps/
-      icon: right-arrow
-    - text: Install
-      link: install/
-      variant: secondary
-    - text: GitHub
-      link: https://github.com/KitoOrg/kito
-      icon: external
-      variant: minimal
+  title: Kito
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import HomeSections from '../../components/HomeSections.astro';
 
-<CardGrid>
-	<Card title="Every agent in its own lane" icon="seti:git">
-		An agent opens a lane by saying why and what it will change. It works in a
-		copy of its own; every save is recorded, with no commits to make. Lanes can
-		be stacked on each other's work before it lands.
-	</Card>
-	<Card title="Merged function by function" icon="puzzle">
-		Two agents that changed different functions of the same file, or added
-		functions at the same place, do not conflict. A real conflict stops one
-		lane only, and is decided by taking a side or writing the text.
-	</Card>
-	<Card title="Git stays" icon="github">
-		Every checkpoint is a git commit, so GitHub and CI keep working. Commits
-		made with plain git on the remote come back in through a lane and are
-		merged like any other work.
-	</Card>
-	<Card title="Why code is the way it is" icon="information">
-		Every function and line keeps the reason it was written for. The next
-		agent is told before it changes it, and anyone can ask with `kito why`.
-	</Card>
-</CardGrid>
-
-## How a team works with it
-
-[Using Kito, day to day](guide/using-kito/) walks from an empty directory to
-a team on a server. [The life cycle of a change](guide/lifecycle/) says who
-does what, from a task to the main lane. [Why it is faster for teams of
-agents](guide/why-faster/) keeps apart what was measured and what was not.
-What Kito does not do itself is added by [plugins](plugins/).
-
-## What it looks like
-
-```bash
-kito lane open alice --intent "taxes on every total" --scope src/shop.ts:total
-# … the agent edits the files of its lane …
-kito integrate lane/1
-```
-
-```text
-lane/1: integrated as ckpt#2 (git 78ff4e73aa), verified in 2.1 s
-```
-
-Kito runs on Linux and macOS (on Windows, in WSL). It works with Claude Code
-and any agent that speaks MCP. [Install it](install/), then follow
-[First steps](getting-started/first-steps/).
+<HomeSections />

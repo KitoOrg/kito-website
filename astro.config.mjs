@@ -15,7 +15,9 @@ export default defineConfig({
 			favicon: '/favicon.svg',
 			// The typeface is carried with the site: nothing is asked of anybody else.
 			customCss: ['@fontsource-variable/geist', '@fontsource-variable/geist-mono', './src/styles/kito.css'],
-			description: 'Semantic version control for swarms of AI agents.',
+			description: 'Version control for teams of AI agents: a lane for each, merged function by function, with the reason kept with the code.',
+			// The bar with search on every page; the map at the top of the home page.
+			components: { Header: './src/components/Header.astro', Hero: './src/components/Hero.astro' },
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/KitoOrg/kito' }],
 			editLink: { baseUrl: 'https://github.com/KitoOrg/kito-website/edit/main/' },
 			sidebar: [

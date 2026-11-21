@@ -63,13 +63,13 @@ other lanes go on. How much of a person's time this saves was not measured.
 
 Every figure here is from
 [`docs/benchmarks.md`](https://github.com/KitoOrg/kito/blob/main/docs/benchmarks.md)
-in the Kito repository, under the section named. All were taken on one
+in the Kito repository, under the heading named. All were taken on one
 4-core virtual machine with a virtual disk: they are valid as comparisons
 on that machine, not as absolute values.
 
 ### Merges that git does not make
 
-Section "The same merges, given to git". A swarm of simulated agents works
+In the benchmarks, "the same merges, given to git". A swarm of simulated agents works
 through the real daemon. For each integration, git is given the three
 states Kito merged, through `git merge-tree --write-tree`.
 
@@ -85,7 +85,7 @@ like it.
 
 ### Waiting at the checks
 
-Section "Phase 13 · waiting at the checks". Ten agents, each on a file of
+In the benchmarks, "waiting at the checks". Ten agents, each on a file of
 its own, ask to be integrated at the same instant. The check is `sleep 2`.
 The wait is from an agent's request to its answer.
 
@@ -99,7 +99,7 @@ file, the first row still holds.
 
 ### The same operations as git
 
-Section "Compared with git". Git 2.43 and Kito on the same 50,000 files,
+In the benchmarks, "compared with git". Git 2.43 and Kito on the same 50,000 files,
 with `git worktree` for the agents' working copies and `git merge --no-ff`
 to bring their work in.
 
@@ -117,7 +117,7 @@ operations: this table does not show Kito saving a team time.
 
 ### What the rules cost
 
-Section "Phase 11 · the rules, checked before an edit". A repository of
+In the benchmarks, "the rules, checked before an edit". A repository of
 20,000 files and 500,000 operations. Times are of the whole command, as
 Claude Code runs it around a tool.
 
@@ -133,7 +133,7 @@ the rules cost little at each edit. It does not say that they save time.
 
 ### Integration on a large repository
 
-Section "Phase 3 · integration and lane creation on a large repository". A
+In the benchmarks, "integration and lane creation on a large repository". A
 repository of 50,000 TypeScript files of 1 kB, with the checks and the git
 export off. Integrating a lane that changed one function in each of 50
 files took 90 ms, and 299 ms for 500 files. Creating a lane took 462–561 ms
