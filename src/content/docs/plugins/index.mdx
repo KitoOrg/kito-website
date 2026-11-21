@@ -1,0 +1,24 @@
+---
+title: Plugins
+description: What Kito does not do itself is added by programs of their own.
+---
+
+import PluginBrowser from '../../../components/PluginBrowser.astro';
+
+Kito has no web view, no sign-on and no knowledge of your coding assistant
+built in. Each of those is a **plugin**: a separate program named
+`kito-<name>`, with a manifest (`kito-plugin.toml`) that says what it asks
+for and what it adds.
+
+Nothing of a plugin runs unless a repository or a server enabled it, and it
+gets only the permissions it was given.
+
+<PluginBrowser />
+
+:::note
+None of these is published in the registry yet. For now each is built from
+its repository and installed from a directory.
+:::
+
+How a plugin is installed and enabled:
+[Installing and writing plugins](installing/).

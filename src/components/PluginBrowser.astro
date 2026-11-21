@@ -1,0 +1,290 @@
+---
+// Kito's plugins as cards, narrowed by words and by kind.
+//
+// Without JavaScript every card shows, and the controls, which would do
+// nothing, stay hidden: the script at the end shows them.
+// Meant to be on a page once: the field has an id for its label.
+import plugins from '../data/plugins.json';
+
+const kinds = [
+	{ value: 'all', label: 'All' },
+	{ value: 'server', label: 'Server' },
+	{ value: 'repository', label: 'Repository' },
+	{ value: 'assistant', label: 'Assistant' },
+	{ value: 'sign-in', label: 'Sign-in' },
+];
+const kindLabel = (kind: string) => kinds.find((known) => known.value === kind)?.label ?? kind;
+---
+
+<div class="plugin-browser not-content" data-plugin-browser>
+	<div class="controls" data-controls hidden>
+		<div class="field">
+			<label for="plugin-browser-words">Filter by words</label>
+			<input id="plugin-browser-words" type="search" autocomplete="off" spellcheck="false" />
+		</div>
+		<div class="kinds" role="group" aria-label="Filter by kind">
+			{
+				kinds.map((kind) => (
+					<button type="button" data-kind={kind.value} aria-pressed={kind.value === 'all' ? 'true' : 'false'}>
+						{kind.label}
+					</button>
+				))
+			}
+		</div>
+	</div>
+
+	<p class="count" role="status">{plugins.length} of {plugins.length} plugins shown.</p>
+
+	<ul class="cards">
+		{
+			plugins.map((plugin) => (
+				<li class="card" data-card data-kinds={plugin.kinds.join(' ')}>
+					<h2 class="title">{plugin.title}</h2>
+					<p class="program">
+						<code>{plugin.program}</code>
+					</p>
+					<p class="summary">{plugin.summary}</p>
+					<ul class="labels" aria-label="Kinds">
+						{plugin.kinds.map((kind) => <li>{kindLabel(kind)}</li>)}
+					</ul>
+					<dl class="facts">
+						<div>
+							<dt>Asks for</dt>
+							{plugin.permissions.map((permission) => (
+								<dd>
+									<code>{permission}</code>
+								</dd>
+							))}
+						</div>
+						<div>
+							<dt>Version</dt>
+							<dd>{plugin.version}</dd>
+						</div>
+					</dl>
+					<a class="more" href={'/' + plugin.page}>
+						More on {plugin.program}
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</div>
+
+<script is:inline>
+	(() => {
+		const root = document.querySelector('[data-plugin-browser]');
+		if (!root) return;
+		const controls = root.querySelector('[data-controls]');
+		const field = root.querySelector('input[type="search"]');
+		const buttons = Array.from(root.querySelectorAll('button[data-kind]'));
+		const count = root.querySelector('[role="status"]');
+		if (!controls || !field || !count) return;
+
+		const cards = Array.from(root.querySelectorAll('[data-card]')).map((element) => {
+			// The text of a card, its pieces a space apart: no word is made of two.
+			const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+			const pieces = [];
+			while (walker.nextNode()) pieces.push(walker.currentNode.nodeValue);
+			return {
+				element,
+				text: pieces.join(' ').toLowerCase(),
+				kinds: (element.getAttribute('data-kinds') || '').split(' '),
+			};
+		});
+		let kind = 'all';
+
+		const filter = () => {
+			const words = field.value.toLowerCase().split(/\s+/).filter(Boolean);
+			let shown = 0;
+			for (const card of cards) {
+				const fits =
+					(kind === 'all' || card.kinds.includes(kind)) &&
+					words.every((word) => card.text.includes(word));
+				card.element.hidden = !fits;
+				if (fits) shown += 1;
+			}
+			count.textContent =
+				shown === 0 ? 'No plugin fits.' : shown + ' of ' + cards.length + ' plugins shown.';
+		};
+
+		field.addEventListener('input', filter);
+		for (const button of buttons) {
+			button.addEventListener('click', () => {
+				kind = button.getAttribute('data-kind') || 'all';
+				for (const other of buttons) {
+					other.setAttribute('aria-pressed', other === button ? 'true' : 'false');
+				}
+				filter();
+			});
+		}
+
+		controls.hidden = false;
+		filter();
+	})();
+</script>
+
+<style>
+	.plugin-browser {
+		display: grid;
+		gap: 1rem;
+	}
+
+	/* `hidden` has to win over the layouts below. */
+	.controls[hidden],
+	.card[hidden] {
+		display: none;
+	}
+
+	.controls {
+		display: grid;
+		gap: 0.75rem;
+	}
+	.field {
+		display: grid;
+		gap: 0.25rem;
+	}
+	label {
+		color: var(--sl-color-white);
+		font-size: 0.875rem;
+		font-weight: 600;
+	}
+	input {
+		width: 100%;
+		padding: 0.5rem 0.75rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.5rem;
+		background: var(--sl-color-gray-6);
+		color: var(--sl-color-white);
+	}
+	.kinds {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+	button {
+		padding: 0.25rem 0.75rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 999px;
+		background: transparent;
+		color: var(--sl-color-text);
+		font-size: 0.875rem;
+		line-height: 1.5;
+		cursor: pointer;
+	}
+	button:hover {
+		border-color: var(--sl-color-accent);
+		color: var(--sl-color-white);
+	}
+	button[aria-pressed='true'] {
+		border-color: var(--sl-color-accent);
+		background: var(--sl-color-accent-low);
+		color: var(--sl-color-white);
+	}
+	input:focus-visible,
+	button:focus-visible,
+	a:focus-visible {
+		outline: 2px solid var(--sl-color-accent);
+		outline-offset: 2px;
+	}
+
+	.count {
+		color: var(--sl-color-text);
+		font-size: 0.875rem;
+	}
+
+	.cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+		gap: 1rem;
+		padding: 0;
+		list-style: none;
+	}
+	.card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		padding: 1rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.5rem;
+		background: var(--sl-color-gray-6);
+	}
+	.title {
+		color: var(--sl-color-white);
+		font-size: 1.125rem;
+		font-weight: 600;
+		line-height: 1.2;
+	}
+	code {
+		font-family: var(--sl-font-mono, ui-monospace, monospace);
+	}
+	.program {
+		color: var(--sl-color-text);
+		font-size: 0.8125rem;
+		line-height: 1.2;
+	}
+	.summary {
+		color: var(--sl-color-text);
+		font-size: 0.9375rem;
+		line-height: 1.5;
+	}
+
+	.labels {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.375rem;
+		padding: 0;
+		list-style: none;
+	}
+	.labels li {
+		padding: 0 0.5rem;
+		border-radius: 999px;
+		background: var(--sl-color-accent-low);
+		color: var(--sl-color-white);
+		font-size: 0.75rem;
+		font-weight: 600;
+		line-height: 1.6;
+	}
+
+	.facts {
+		display: grid;
+		gap: 0.25rem;
+		font-size: 0.8125rem;
+		line-height: 1.5;
+	}
+	.facts div {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.375rem;
+	}
+	.facts dt {
+		color: var(--sl-color-text);
+	}
+	.facts dd {
+		color: var(--sl-color-white);
+	}
+	.facts code {
+		padding: 0 0.375rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.25rem;
+		font-size: 0.75rem;
+	}
+
+	/* The text of a link is not in the accent: on the dark theme the accent
+	   is too dim to read. It underlines it. */
+	.more {
+		align-self: flex-start;
+		margin-top: auto;
+		padding-top: 0.25rem;
+		color: var(--sl-color-white);
+		font-size: 0.875rem;
+		font-weight: 600;
+		text-decoration: underline;
+		text-decoration-color: var(--sl-color-accent);
+		text-decoration-thickness: 2px;
+		text-underline-offset: 0.2em;
+	}
+	.more:hover {
+		text-decoration-color: currentColor;
+	}
+</style>

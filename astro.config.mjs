@@ -21,7 +21,14 @@ export default defineConfig({
 			sidebar: [
 				{ label: 'Install', slug: 'install' },
 				{ label: 'Download', slug: 'download' },
-				{ label: 'Plugins', slug: 'plugins' },
+				{
+					label: 'Guide',
+					items: [
+						{ label: 'Using Kito, day to day', slug: 'guide/using-kito' },
+						{ label: 'The life cycle of a change', slug: 'guide/lifecycle' },
+						{ label: 'Why it is faster for teams of agents', slug: 'guide/why-faster' },
+					],
+				},
 				{
 					label: 'Getting started',
 					items: [
@@ -39,6 +46,20 @@ export default defineConfig({
 						{ label: 'Why code is the way it is', slug: 'concepts/why' },
 						{ label: 'Lanes on lanes', slug: 'concepts/lanes-on-lanes' },
 						{ label: 'Permanent lanes', slug: 'concepts/permanent-lanes' },
+					],
+				},
+				{
+					label: 'Plugins',
+					items: [
+						{ label: 'All plugins', slug: 'plugins' },
+						{ label: 'Installing and writing plugins', slug: 'plugins/installing' },
+						{ label: 'Web client', slug: 'plugins/web' },
+						{ label: 'GitHub', slug: 'plugins/github' },
+						{ label: 'OpenID Connect', slug: 'plugins/oidc' },
+						{ label: 'Kitchen', slug: 'plugins/kitchen' },
+						{ label: 'Claude Code', slug: 'plugins/claude' },
+						{ label: 'Codex', slug: 'plugins/codex' },
+						{ label: 'ZCode', slug: 'plugins/zcode' },
 					],
 				},
 				{ label: 'Design', slug: 'design' },
