@@ -1,6 +1,6 @@
 {
   "name": "github",
-  "about": "GitHub for Kito: sign in to a server, and issues as the tasks of lanes",
+  "about": "GitHub for Kito: sign in, keep a repository in step with one at GitHub, and its issues as tasks",
   "versions": {
     "0.3.0": {
       "api": 1,
@@ -29,6 +29,40 @@
           "url": "https://github.com/KitoOrg/kito-github/releases/download/v0.3.0/kito-github-0.3.0-windows-x86_64.tar.gz",
           "sha256": "3b695a0ebf3e14bd396d0b9882c3df5a188fd54925ff2929af2534b4cb0a6c33",
           "size": 1304723
+        }
+      },
+      "runs": [
+        "server",
+        "repository"
+      ]
+    },
+    "0.4.0": {
+      "api": 1,
+      "files": {
+        "linux-aarch64": {
+          "url": "https://github.com/KitoOrg/kito-github/releases/download/v0.4.0/kito-github-0.4.0-linux-aarch64.tar.gz",
+          "sha256": "7d5259a06098ce71085ba4862ebd213933b57619c9014f465f705c3ff698d939",
+          "size": 1674360
+        },
+        "linux-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-github/releases/download/v0.4.0/kito-github-0.4.0-linux-x86_64.tar.gz",
+          "sha256": "47d49d42df99837caa9b8262916e5dec8daab993a8db52a7ff679d7acf53269b",
+          "size": 1772888
+        },
+        "macos-arm64": {
+          "url": "https://github.com/KitoOrg/kito-github/releases/download/v0.4.0/kito-github-0.4.0-macos-arm64.tar.gz",
+          "sha256": "dd30a91b74091d377ae909d4335aa375641e0761cac20c15d8a3971473a7ff2d",
+          "size": 1613753
+        },
+        "macos-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-github/releases/download/v0.4.0/kito-github-0.4.0-macos-x86_64.tar.gz",
+          "sha256": "fe5d01f9c0a2f77698f4121924ec99e7db63367a362e01373e0d5654afa83b44",
+          "size": 1693992
+        },
+        "windows-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-github/releases/download/v0.4.0/kito-github-0.4.0-windows-x86_64.tar.gz",
+          "sha256": "9f6d378bd8d23ec77f3274d6c8175d629299904ec0c6218ea63f5b7e12956f48",
+          "size": 1647511
         }
       },
       "runs": [

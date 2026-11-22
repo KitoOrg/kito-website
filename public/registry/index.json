@@ -16,8 +16,8 @@
       ]
     },
     "github": {
-      "about": "GitHub for Kito: sign in to a server, and issues as the tasks of lanes",
-      "latest": "0.3.0",
+      "about": "GitHub for Kito: sign in, keep a repository in step with one at GitHub, and its issues as tasks",
+      "latest": "0.4.0",
       "runs": [
         "server",
         "repository"
@@ -33,14 +33,14 @@
     },
     "oidc": {
       "about": "Sign in to a Kito server with OpenID Connect (Google, Okta, Entra, Keycloak…)",
-      "latest": "0.1.0",
+      "latest": "0.1.1",
       "runs": [
         "server"
       ]
     },
     "web": {
       "about": "Kito in a browser: lanes and their review, why code is the way it is, the log, notes",
-      "latest": "0.17.0",
+      "latest": "0.19.0",
       "runs": [
         "server",
         "repository"

@@ -34,6 +34,39 @@
       "runs": [
         "server"
       ]
+    },
+    "0.1.1": {
+      "api": 1,
+      "files": {
+        "linux-aarch64": {
+          "url": "https://github.com/KitoOrg/kito-oidc/releases/download/v0.1.1/kito-oidc-0.1.1-linux-aarch64.tar.gz",
+          "sha256": "67109e08f19f29d70bf7e6f9e88b1584328f542fc447d76c300fd15e0f37f83b",
+          "size": 1329076
+        },
+        "linux-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-oidc/releases/download/v0.1.1/kito-oidc-0.1.1-linux-x86_64.tar.gz",
+          "sha256": "b460c85a7aee0db48ab3b4346fee9914a820c22da86a3df4bf107785615abc10",
+          "size": 1403927
+        },
+        "macos-arm64": {
+          "url": "https://github.com/KitoOrg/kito-oidc/releases/download/v0.1.1/kito-oidc-0.1.1-macos-arm64.tar.gz",
+          "sha256": "7f8362ac3547deac4bffa76b50f4f8e6f9ca2435ee8791df5d39bf4a41cc0806",
+          "size": 1271601
+        },
+        "macos-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-oidc/releases/download/v0.1.1/kito-oidc-0.1.1-macos-x86_64.tar.gz",
+          "sha256": "1af83d573d52b138c38c2648c6c21a7d33178974126119b0844c75dd5b363cea",
+          "size": 1332339
+        },
+        "windows-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-oidc/releases/download/v0.1.1/kito-oidc-0.1.1-windows-x86_64.tar.gz",
+          "sha256": "a337b2e63bd670bb966a8f22de4b13009c833db6da826cddc615dec1db0a4aed",
+          "size": 1259638
+        }
+      },
+      "runs": [
+        "server"
+      ]
     }
   }
 }

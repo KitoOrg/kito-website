@@ -103,6 +103,40 @@
         "server",
         "repository"
       ]
+    },
+    "0.19.0": {
+      "api": 1,
+      "files": {
+        "linux-aarch64": {
+          "url": "https://github.com/KitoOrg/kito-web/releases/download/v0.19.0/kito-web-0.19.0-linux-aarch64.tar.gz",
+          "sha256": "d53f840c5c4b11b639c2877e16149f71b0fc2edea17641bacc593f4377248e81",
+          "size": 1098656
+        },
+        "linux-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-web/releases/download/v0.19.0/kito-web-0.19.0-linux-x86_64.tar.gz",
+          "sha256": "ec3fc58b9654de10d8be4e031c6c4883af6b6733da556f5aa5eb3ee2ff74f30d",
+          "size": 1130034
+        },
+        "macos-arm64": {
+          "url": "https://github.com/KitoOrg/kito-web/releases/download/v0.19.0/kito-web-0.19.0-macos-arm64.tar.gz",
+          "sha256": "5587d494a32d96aecaef880886dbfbf0ab70fb08ca8332829afd15f706bdfeb6",
+          "size": 1074226
+        },
+        "macos-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-web/releases/download/v0.19.0/kito-web-0.19.0-macos-x86_64.tar.gz",
+          "sha256": "cc86ea66f43d7a1e8837766ae14691eb055f508ba8e134873e2ab9700cfb05b1",
+          "size": 1091297
+        },
+        "windows-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-web/releases/download/v0.19.0/kito-web-0.19.0-windows-x86_64.tar.gz",
+          "sha256": "4a1499ded10b8304fe79b30276a06fab75ddf5bf1687e3b9c61f9dd6af15bab0",
+          "size": 1054506
+        }
+      },
+      "runs": [
+        "server",
+        "repository"
+      ]
     }
   }
 }
