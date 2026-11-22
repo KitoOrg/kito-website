@@ -1,0 +1,36 @@
+{
+  "name": "codex",
+  "about": "Codex, the coding assistant, set up to work through Kito",
+  "versions": {
+    "0.1.4": {
+      "api": 1,
+      "files": {
+        "linux-aarch64": {
+          "url": "https://github.com/KitoOrg/kito-codex/releases/download/v0.1.4/kito-codex-0.1.4-linux-aarch64.tar.gz",
+          "sha256": "96d11a69043d7c4f4b2bc72b1b88b13014308bd41e0c8f62ee6fa34655d2b20b",
+          "size": 404089
+        },
+        "linux-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-codex/releases/download/v0.1.4/kito-codex-0.1.4-linux-x86_64.tar.gz",
+          "sha256": "61c10cd64bac564bb60ce066803785b489184e6d361bff79729e8fed83a422c6",
+          "size": 424373
+        },
+        "macos-arm64": {
+          "url": "https://github.com/KitoOrg/kito-codex/releases/download/v0.1.4/kito-codex-0.1.4-macos-arm64.tar.gz",
+          "sha256": "3cc4df1f6543a5fc15dc6b8f1ee8dcac2e0ee38b9318538adb3708299c13028d",
+          "size": 395660
+        },
+        "macos-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-codex/releases/download/v0.1.4/kito-codex-0.1.4-macos-x86_64.tar.gz",
+          "sha256": "3f25102ec3be2ec1456216cd80f5aff44add1e637ed5e24f4ad2e3a65c19239c",
+          "size": 407824
+        },
+        "windows-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-codex/releases/download/v0.1.4/kito-codex-0.1.4-windows-x86_64.tar.gz",
+          "sha256": "ac048debba22e7ff86cc2435c05962bb689bbb8a5861f34ecffb3efc8e986b4e",
+          "size": 355902
+        }
+      }
+    }
+  }
+}

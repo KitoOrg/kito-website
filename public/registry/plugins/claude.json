@@ -1,0 +1,36 @@
+{
+  "name": "claude",
+  "about": "Claude Code set up to work through Kito",
+  "versions": {
+    "0.1.2": {
+      "api": 1,
+      "files": {
+        "linux-aarch64": {
+          "url": "https://github.com/KitoOrg/kito-claude/releases/download/v0.1.2/kito-claude-0.1.2-linux-aarch64.tar.gz",
+          "sha256": "463eda4a7de656c3c44d59f1077569660ef8b490828f2b14999b27b9bd600376",
+          "size": 230418
+        },
+        "linux-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-claude/releases/download/v0.1.2/kito-claude-0.1.2-linux-x86_64.tar.gz",
+          "sha256": "f197b69370917b98e629c6b3d505da7f546b96b13a7e02ce32af80bb757fd1ee",
+          "size": 246247
+        },
+        "macos-arm64": {
+          "url": "https://github.com/KitoOrg/kito-claude/releases/download/v0.1.2/kito-claude-0.1.2-macos-arm64.tar.gz",
+          "sha256": "51773c0716e018f1be3be5d66bde58c41f3dc2730dc20ce17891763329b0714c",
+          "size": 227055
+        },
+        "macos-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-claude/releases/download/v0.1.2/kito-claude-0.1.2-macos-x86_64.tar.gz",
+          "sha256": "1ceb3149e1c2e55988985956d32277bf4c33695c8a1453b3f367e255519c0909",
+          "size": 236953
+        },
+        "windows-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-claude/releases/download/v0.1.2/kito-claude-0.1.2-windows-x86_64.tar.gz",
+          "sha256": "f9d143ff95933bfc740b84d820fb10315e3e2d420a544e06473182db5de8d90a",
+          "size": 153046
+        }
+      }
+    }
+  }
+}

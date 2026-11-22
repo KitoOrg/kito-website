@@ -1,4 +1,33 @@
 {
   "registry": 1,
-  "plugins": {}
+  "plugins": {
+    "claude": {
+      "about": "Claude Code set up to work through Kito",
+      "latest": "0.1.2"
+    },
+    "codex": {
+      "about": "Codex, the coding assistant, set up to work through Kito",
+      "latest": "0.1.4"
+    },
+    "github": {
+      "about": "GitHub for Kito: sign in to a server, and issues as the tasks of lanes",
+      "latest": "0.3.0"
+    },
+    "kitchen": {
+      "about": "A team's kitchen: the behaviour, concepts and recipes it shares to work on its repositories",
+      "latest": "0.4.0"
+    },
+    "oidc": {
+      "about": "Sign in to a Kito server with OpenID Connect (Google, Okta, Entra, Keycloak…)",
+      "latest": "0.1.0"
+    },
+    "web": {
+      "about": "Kito in a browser: lanes and their review, why code is the way it is, the log, notes",
+      "latest": "0.16.1"
+    },
+    "zcode": {
+      "about": "ZCode, the coding assistant of Z.ai, set up to work through Kito",
+      "latest": "0.2.0"
+    }
+  }
 }

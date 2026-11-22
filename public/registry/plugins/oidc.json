@@ -1,0 +1,36 @@
+{
+  "name": "oidc",
+  "about": "Sign in to a Kito server with OpenID Connect (Google, Okta, Entra, Keycloak…)",
+  "versions": {
+    "0.1.0": {
+      "api": 1,
+      "files": {
+        "linux-aarch64": {
+          "url": "https://github.com/KitoOrg/kito-oidc/releases/download/v0.1.0/kito-oidc-0.1.0-linux-aarch64.tar.gz",
+          "sha256": "abdf7f1eddc139acb4b606c3117b4b3a4804bf1532e541a350e8f65430bffd0b",
+          "size": 1329118
+        },
+        "linux-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-oidc/releases/download/v0.1.0/kito-oidc-0.1.0-linux-x86_64.tar.gz",
+          "sha256": "7ef60e6948e9601c4ea6609e636ad4c01591b28c5aefb0fd13c1bc70e9075edd",
+          "size": 1403582
+        },
+        "macos-arm64": {
+          "url": "https://github.com/KitoOrg/kito-oidc/releases/download/v0.1.0/kito-oidc-0.1.0-macos-arm64.tar.gz",
+          "sha256": "bdc07f54eb3cf276e02dfa4585a51b48b0c0a8f4a3e60d308d9e12597cb3ddfa",
+          "size": 1271176
+        },
+        "macos-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-oidc/releases/download/v0.1.0/kito-oidc-0.1.0-macos-x86_64.tar.gz",
+          "sha256": "93b26383059d771bc31d6bf6aa01e25f3a56fae52cf675057579e9a5f2f3c338",
+          "size": 1331861
+        },
+        "windows-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-oidc/releases/download/v0.1.0/kito-oidc-0.1.0-windows-x86_64.tar.gz",
+          "sha256": "84d8f80fd949c67d32650ee708072a9ff580697874527f89b0c8bab28617cac2",
+          "size": 1259498
+        }
+      }
+    }
+  }
+}

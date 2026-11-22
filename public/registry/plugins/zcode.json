@@ -1,0 +1,36 @@
+{
+  "name": "zcode",
+  "about": "ZCode, the coding assistant of Z.ai, set up to work through Kito",
+  "versions": {
+    "0.2.0": {
+      "api": 1,
+      "files": {
+        "linux-aarch64": {
+          "url": "https://github.com/KitoOrg/kito-zcode/releases/download/v0.2.0/kito-zcode-0.2.0-linux-aarch64.tar.gz",
+          "sha256": "f9e76abeac50df00adacb8b08f9f1e5a8274b65f64a580531fe1458c459f81d8",
+          "size": 240365
+        },
+        "linux-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-zcode/releases/download/v0.2.0/kito-zcode-0.2.0-linux-x86_64.tar.gz",
+          "sha256": "e2f4f510d06acbc577e4f434ade7eca47e0945fe3eb6d6355587106bcd4cbd91",
+          "size": 254216
+        },
+        "macos-arm64": {
+          "url": "https://github.com/KitoOrg/kito-zcode/releases/download/v0.2.0/kito-zcode-0.2.0-macos-arm64.tar.gz",
+          "sha256": "608b8962f358147a08f4384b9278731db65fe2e0c618bc391f15434b5b4f7f63",
+          "size": 236130
+        },
+        "macos-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-zcode/releases/download/v0.2.0/kito-zcode-0.2.0-macos-x86_64.tar.gz",
+          "sha256": "6ac10f0991e4256672630dc80f1e6d493725aea5a8d1cbe040b7967137f3905e",
+          "size": 246328
+        },
+        "windows-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-zcode/releases/download/v0.2.0/kito-zcode-0.2.0-windows-x86_64.tar.gz",
+          "sha256": "8be327db97e65d81ba61b61941a187d5654bc318dad5145798a67d638738038c",
+          "size": 162701
+        }
+      }
+    }
+  }
+}

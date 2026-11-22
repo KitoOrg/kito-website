@@ -1,0 +1,36 @@
+{
+  "name": "web",
+  "about": "Kito in a browser: lanes and their review, why code is the way it is, the log, notes",
+  "versions": {
+    "0.16.1": {
+      "api": 1,
+      "files": {
+        "linux-aarch64": {
+          "url": "https://github.com/KitoOrg/kito-web/releases/download/v0.16.1/kito-web-0.16.1-linux-aarch64.tar.gz",
+          "sha256": "cf63f2f1390ca52849f24f46c15a4f4289cbde27ad6d8c13004b80b6e34d3a22",
+          "size": 1076456
+        },
+        "linux-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-web/releases/download/v0.16.1/kito-web-0.16.1-linux-x86_64.tar.gz",
+          "sha256": "b3b7091d65709f6188e7eeeb65074951b99db3ab3861077f629e35414ea57a04",
+          "size": 1106808
+        },
+        "macos-arm64": {
+          "url": "https://github.com/KitoOrg/kito-web/releases/download/v0.16.1/kito-web-0.16.1-macos-arm64.tar.gz",
+          "sha256": "5c5dcd1eca08bfc7b7ed477ca0d2e233d528ef5e9c580b6bfedd1f03ec636169",
+          "size": 1055523
+        },
+        "macos-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-web/releases/download/v0.16.1/kito-web-0.16.1-macos-x86_64.tar.gz",
+          "sha256": "992d96e0ba41eee0f89924f47d118c4e47c1491cfe9c1c21cb5c3c6c92328d77",
+          "size": 1068625
+        },
+        "windows-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-web/releases/download/v0.16.1/kito-web-0.16.1-windows-x86_64.tar.gz",
+          "sha256": "f4e9a78c9f4f34b472f43cf2136944d419e89bc9ceaa9fd8ebc124d81f39e09b",
+          "size": 1032395
+        }
+      }
+    }
+  }
+}

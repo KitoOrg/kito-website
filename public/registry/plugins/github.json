@@ -1,0 +1,36 @@
+{
+  "name": "github",
+  "about": "GitHub for Kito: sign in to a server, and issues as the tasks of lanes",
+  "versions": {
+    "0.3.0": {
+      "api": 1,
+      "files": {
+        "linux-aarch64": {
+          "url": "https://github.com/KitoOrg/kito-github/releases/download/v0.3.0/kito-github-0.3.0-linux-aarch64.tar.gz",
+          "sha256": "a130a0e996570ff6918bf93465d944fe0b7407c01657da4ee7a112b98439c3fa",
+          "size": 1367669
+        },
+        "linux-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-github/releases/download/v0.3.0/kito-github-0.3.0-linux-x86_64.tar.gz",
+          "sha256": "4315a77f35fa528d75084c0c33e894a93e7388b4a7e0c0ec419a945de7edf8df",
+          "size": 1436149
+        },
+        "macos-arm64": {
+          "url": "https://github.com/KitoOrg/kito-github/releases/download/v0.3.0/kito-github-0.3.0-macos-arm64.tar.gz",
+          "sha256": "f274aafd087e73a20a2f1891d2e9b40d5e33378cdbf1c36320861d241353799e",
+          "size": 1310576
+        },
+        "macos-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-github/releases/download/v0.3.0/kito-github-0.3.0-macos-x86_64.tar.gz",
+          "sha256": "6d9b492cc2dc8087762a98efb75a2e19ccd958a256be35caa004d73d0df18df2",
+          "size": 1377725
+        },
+        "windows-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-github/releases/download/v0.3.0/kito-github-0.3.0-windows-x86_64.tar.gz",
+          "sha256": "3b695a0ebf3e14bd396d0b9882c3df5a188fd54925ff2929af2534b4cb0a6c33",
+          "size": 1304723
+        }
+      }
+    }
+  }
+}

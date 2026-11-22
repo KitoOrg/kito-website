@@ -1,0 +1,36 @@
+{
+  "name": "kitchen",
+  "about": "A team's kitchen: the behaviour, concepts and recipes it shares to work on its repositories",
+  "versions": {
+    "0.4.0": {
+      "api": 2,
+      "files": {
+        "linux-aarch64": {
+          "url": "https://github.com/KitoOrg/kito-kitchen/releases/download/v0.4.0/kito-kitchen-0.4.0-linux-aarch64.tar.gz",
+          "sha256": "b5e7ad558eb8b69f3c4710a70b8b81f2936967340d8b911206362890d44e21c5",
+          "size": 462835
+        },
+        "linux-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-kitchen/releases/download/v0.4.0/kito-kitchen-0.4.0-linux-x86_64.tar.gz",
+          "sha256": "e2107c39e944f7c2fd23003e297d25f001d50b4d6e7dddad2f79f129de46c10b",
+          "size": 503861
+        },
+        "macos-arm64": {
+          "url": "https://github.com/KitoOrg/kito-kitchen/releases/download/v0.4.0/kito-kitchen-0.4.0-macos-arm64.tar.gz",
+          "sha256": "33f971617d8d4f3b910fb25a54e7281086b856b54d9010d15d17006e63845c3d",
+          "size": 455870
+        },
+        "macos-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-kitchen/releases/download/v0.4.0/kito-kitchen-0.4.0-macos-x86_64.tar.gz",
+          "sha256": "3de155b0ee637b3361fdb36aa9caafcdff7646dddfdd77acc236018d72914d88",
+          "size": 479538
+        },
+        "windows-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-kitchen/releases/download/v0.4.0/kito-kitchen-0.4.0-windows-x86_64.tar.gz",
+          "sha256": "e559cc3670a957a1c6fcee15fb1b1bbeb50e29608dccbfc98ab2dba9f90f4c26",
+          "size": 432186
+        }
+      }
+    }
+  }
+}
