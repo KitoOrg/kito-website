@@ -40,7 +40,7 @@
     },
     "web": {
       "about": "Kito in a browser: lanes and their review, why code is the way it is, the log, notes",
-      "latest": "0.16.1",
+      "latest": "0.16.2",
       "runs": [
         "server",
         "repository"
