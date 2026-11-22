@@ -71,4 +71,4 @@ own text. A project set up by one is set up for the other.
 
 ## Version
 
-0.1.1
+0.1.2

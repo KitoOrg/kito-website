@@ -34,7 +34,8 @@ kito assistant default claude codex   # what every new project gets
 
 `kito init` and `kito import` set up the ones you said, or ask at the
 terminal for the ones found on your machine. Any agent that speaks MCP
-can use `kito-mcp` as it is.
+can use `kito-mcp` as it is. What the assistants are told beyond Kito's
+own rules is yours to write: [What your agents are told](../instructions/).
 
 ## A lane for each piece of work
 
@@ -54,6 +55,26 @@ A lane also says which assistant works in it, and on what model when that
 is known: the program names itself to the MCP server, or
 `kito lane open --assistant NAME` says it by hand. It is a label, by which
 nothing is decided. See [Lanes, intents and scopes](../../concepts/lanes/).
+
+## Keep the tasks
+
+What needs doing can be written down where the lanes are. A lane says
+which task it is for, and what is said on a task is told to the agents in
+its lanes:
+
+```bash
+kito task add "Prices lose half a cent" --for bob
+kito task                               # what is still to do
+kito lane open alice --task task#1 --intent "round, do not floor" --scope src/shop.ts:total
+kito task comment task#1 "The receipts too."
+kito task done task#1
+```
+
+A task is open, then in a lane, then ready to close once its lanes are
+closed, then done: a person closes it. An agent takes a task up when it
+is told to, and may say that it thinks one is done. With the
+[GitHub plugin](../../plugins/github/), the issues of a linked repository
+are its tasks.
 
 ## See who is on what
 
@@ -78,15 +99,22 @@ the plugin is installed and the repository has enabled it
 ```bash
 kito lane diff 1
 kito lane comment 1 "Half a cent is lost: round, do not floor." --on src/shop.ts:4
+kito lane comment 1 "Rounded now." --reply comment#1
 kito lane request-changes 1 "See the comment on line 4."
 kito lane approve 1
+kito lane review 1                      # where its review stands
 ```
 
 `kito lane diff` shows what a lane changes, by file and by function. A
 comment is how a person tells an agent in a lane what to change: the
 agent's next edit is held back once, with the comments it has not read. A
-request for changes stops the lane until it is taken back or replaced.
-Approving brings nothing in: integrating does.
+request for changes stops the lane until it is taken back or replaced, and
+its agent is told at once. Approving integrates nothing: integrating does.
+
+In the [web client](../../plugins/web/#a-lane) a review is written on the
+diff: comments on lines wait as a draft and are sent with the verdict, in
+one go. A comment may suggest the lines to put in place, which the agent
+applies, or a person with one press.
 
 ## Integrate
 
@@ -121,12 +149,31 @@ is decided by taking one side or by writing the text. Then integrate again.
 ```bash
 kito why src/shop.ts:total
 kito reasons cents
+kito note src/shop.ts:total "Called by the nightly billing job: do not rename."
 ```
 
 `kito why` answers for a function, a file or some lines: the reasons it
 changed, who changed it and for whom, the lane, the checkpoint, and who
-uses it. `kito reasons` finds earlier work by the words of its reason. See
+uses it. `kito reasons` finds earlier work by the words of its reason. A
+note says what no change says: it is told with the why of that code, and
+to an agent before it changes it. See
 [Why code is the way it is](../../concepts/why/).
+
+## Search, and the numbers
+
+```bash
+kito search cents                                 # reasons, lanes, tasks, comments, notes, changes
+kito search --kind lane --who alice --since 7d
+kito search rounding --where src/shop.ts --outcome integrated
+kito stats --since 30d
+```
+
+`kito search` finds what was done by its words, and narrows it by kind, by
+time, by who (a person, an agent, an assistant or a model), by where (a
+file, a directory or a function) and by how it ended. `kito stats` gives
+the numbers: how lanes flow, what came of the lanes of each assistant and
+model, where the code is busy, and review. In a directory connected to a
+server, `--everywhere` asks every repository you may use.
 
 ## Git
 
@@ -166,8 +213,14 @@ kito connect kito.example.com/shop   # signs you in in the browser
 ```
 
 People have roles. `read` sees and follows. `write` opens lanes and works
-in them. `integrate` brings lanes into the main lane. A lane asked for by
+in them. `integrate` integrates lanes into the main lane. `maintain`
+changes the repository's rules and says who uses it. A lane asked for by
 somebody who may write is merged and checked, then waits until somebody who
 may integrate runs `kito integrate`.
+
+[Running a Kito server](../server/) has the rest: people, repositories,
+signing in, the audit log and backups. With the
+[web client](../../plugins/web/) enabled on the server, all of it is in a
+browser too.
 
 Next: [The life cycle of a change](../lifecycle/), with who does what.

@@ -31,9 +31,11 @@ repository. Roles and required approvals are for a team's
 
 <Steps>
 
-1. **A task.** A person asks for something in plain words. Kito holds no
-   list of tasks. When a lane names its task, the name stays with the
-   reason of every change made for it.
+1. **A task.** A person asks for something in plain words, or writes it
+   down as a task (`kito task add`); with the GitHub plugin an issue is
+   one. When a lane names its task, the name stays with the reason of
+   every change made for it, and what is said on the task is told to the
+   lane's agent.
 
 2. **A lane, with its reason and its scope.** The agent opens a lane with
    the `open_lane` tool: one sentence saying why (the intent), and what it
@@ -62,8 +64,10 @@ repository. Roles and required approvals are for a team's
 6. **A person reviews.** The reviewer reads `kito lane diff` and comments
    on a function, a file or lines. The agent's first edit after a comment
    is held back once, with the comments it has not read. A request for
-   changes stops the lane. A repository may ask for approvals, from people
-   other than the lane's owner, before a lane goes in.
+   changes stops the lane, and its agent is told at once. A repository may
+   ask for approvals, from people other than the lane's owner, before a
+   lane is integrated. In the web client the comments of a review are
+   written on the diff and sent together with its verdict.
 
    ```bash
    kito lane comment 1 "Half a cent is lost: round, do not floor." --on src/shop.py:4
@@ -136,9 +140,9 @@ people who commit with plain git keep doing so
 
 ## What Kito does not do
 
-- **It does not plan the work.** It holds no list of tasks and assigns
-  nothing. A task comes from a person, or from wherever the team keeps its
-  tasks.
+- **It does not plan the work.** It keeps the tasks people write, and
+  shows which lanes do them. It starts nothing by itself: an agent takes a
+  task up when somebody tells it to.
 - **It does not run the agents.** An assistant such as Claude Code runs the
   agent, on the model it was given. Kito gives it tools, rules and a lane.
   The assistant and the model shown on a lane are what that side said of

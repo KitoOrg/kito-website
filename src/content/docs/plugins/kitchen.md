@@ -10,21 +10,66 @@ every person, whatever coding assistant they use.
 
 ## Who enables it, and where
 
-A server, by its administrator:
+A server, by its administrator. Each person installs it once:
+`kito plugin add kitchen`. In a directory connected to the server there
+is nothing to enable: the server did.
+
+## Starting a kitchen
+
+1. **The plugin**, on the server's machine:
+
+   ```bash
+   kito-server plugin add kitchen
+   kito-server plugin enable kitchen --for-clients
+   ```
+
+2. **The files to start from**, and a repository of the server made of
+   them:
+
+   ```bash
+   kito-server kitchen new ./kitchen "Shopworks"
+   kito-server repo add kitchen --from <a git repository of them>
+   ```
+
+   Or from any directory connected to the server:
+   `kito repos add kitchen --push ./kitchen`.
+
+3. **Which repository is the kitchen**, and what each repository picks:
+
+   ```bash
+   kito-server kitchen set kitchen
+   kito-server kitchen parts shop rust web            # what `shop` picks
+   kito-server repo set shop --kitchen kitchen        # its instructions, for `shop`
+   kito-server kitchen show shop                      # what it gets
+   kito-server kitchen check                          # what is wrong with it
+   ```
+
+   In the [web client](../web/#kitchens), a repository's maintainers
+   choose its kitchen in Settings, or from the kitchen's own page.
+
+4. **Its text.** The starter files are a short behaviour, one concept,
+   one recipe and one instruction: examples to replace. They are written
+   like code: in a lane of the kitchen's repository, reviewed and
+   integrated.
+   In the web client, a file of the kitchen is edited in the browser, and
+   a lane is opened for the change.
+
+### With an assistant
+
+A kitchen is Markdown in a repository, so an assistant can draft it.
+Connect a directory to the kitchen's repository and ask there:
 
 ```bash
-kito-server kitchen new ./kitchen "Shopworks"      # files to start from
-kito-server repo add kitchen --from <a git repository of them>
-kito-server plugin add kitchen
-kito-server plugin enable kitchen --for-clients
-kito-server kitchen set kitchen
-kito-server kitchen parts shop rust web            # what `shop` picks
-kito-server kitchen show shop                      # what it gets
-kito-server kitchen check                          # what is wrong with it
+kito connect kito.example.com/kitchen
 ```
 
-Each person installs it once: `kito plugin add kitchen`. In a directory
-connected to the server there is nothing to enable: the server did.
+> Ask me how we work, one question at a time. Then write `behaviour.md`,
+> a concept for each word we use our own way, and a recipe for each thing
+> we do in steps.
+
+The assistant opens a lane, writes the files, and asks for the
+integration: what it wrote is reviewed like any change. Nothing in Kito
+asks the questions for you: the prompt is yours.
 
 ## What it asks for
 
@@ -109,4 +154,4 @@ says how old it is; what was never asked for is not there to give.
 
 ## Version
 
-0.3.0
+0.4.0

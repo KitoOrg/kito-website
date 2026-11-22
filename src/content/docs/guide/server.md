@@ -84,8 +84,9 @@ A lane asked for by somebody who may write is merged and checked at once,
 then waits for its approvals and for somebody who may integrate to run
 `kito integrate <lane>`.
 
-Admins of the server also manage its plugins from a browser, on a page of
-the web client.
+With the [web client](../../plugins/web/#people) enabled, maintainers and
+admins do the same in a browser, on the People and Settings pages, and
+admins manage the server's plugins there.
 
 People can sign in with GitHub or with your organization's OpenID Connect
 sign-on instead of a token. The plugin says who somebody is. The server
@@ -97,7 +98,8 @@ kito-server --dir /srv/kito user add bob --identity github:bob --repo shop:write
 ```
 
 See [GitHub](../../plugins/github/) and [OpenID Connect](../../plugins/oidc/)
-for setting each up. Tokens stay for scripts and agents.
+for setting each up. A way to sign in is offered once it is set up, not
+before. Tokens stay for scripts and agents.
 
 ## Audit log and backups
 
@@ -236,10 +238,16 @@ kito-server --dir /srv/kito plugin enable web
 ```
 
 - [Web client](../../plugins/web/): Kito in a browser, at the server's HTTP
-  address. [GitHub](../../plugins/github/), [OpenID Connect](../../plugins/oidc/): signing in.
+  address.
+- [GitHub](../../plugins/github/): signing in, and repositories linked to
+  ones at GitHub, with their issues as tasks.
+  [OpenID Connect](../../plugins/oidc/): signing in.
 - [Kitchen](../../plugins/kitchen/): how the team's agents behave, kept on
   the server and given to every agent. It is enabled with `--for-clients`,
   so that it runs in the directories connected to the server too.
+
+A plugin that is enabled or disabled counts at once: the server is not
+started again. Admins do the same from the web client's Plugins page.
 
 ## Checklist
 
