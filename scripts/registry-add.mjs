@@ -52,6 +52,17 @@ const about = text('description') ?? '';
 const api = Number(top.match(/^api\s*=\s*(\d+)/m)?.[1]);
 if (!name || !/^[a-z0-9][a-z0-9_-]*$/.test(name)) fail(`${archive}: its manifest has no name a plugin can have`);
 if (!version || !Number.isInteger(api)) fail(`${archive}: its manifest has no version, or no api`);
+// Where it runs, as Kito's `Manifest::runs` says (ADR 0008): one that
+// sets up a coding assistant is for the machines people work on; one that
+// only signs in, serves pages or adds server commands is for a server.
+const permissions = (top.match(/^permissions\s*=\s*\[([^\]]*)\]/m)?.[1] ?? '').match(/[a-z_]+/g) ?? [];
+const has = (table) => new RegExp(`^\\[${table}\\]`, 'm').test(manifest);
+const assistant = has('assistant');
+const inRepository =
+  assistant ||
+  ['\\[command\\]', '\\[event\\]', '\\[gate\\]', '\\[tool\\]', 'session'].some(has) ||
+  permissions.some((permission) => ['read', 'write', 'integrate', 'admin'].includes(permission));
+const runs = [...(assistant ? [] : ['server']), ...(inRepository ? ['repository'] : [])];
 const program = new RegExp(`(^|/)kito-${name}(\\.exe)?$`);
 if (!members.some((member) => program.test(member))) fail(`${archive}: the program kito-${name} is not in it`);
 
@@ -72,6 +83,7 @@ const plugin = read(pluginPath, { name, about, versions: {} });
 plugin.about = about;
 plugin.versions[version] ??= { api, files: {} };
 plugin.versions[version].api = api;
+plugin.versions[version].runs = runs;
 plugin.versions[version].files[platform] = file;
 write(pluginPath, plugin);
 
@@ -85,7 +97,7 @@ const later = (a, b) => {
 const latest = Object.keys(plugin.versions).sort(later).at(-1);
 const indexPath = join(registry, 'index.json');
 const index = read(indexPath, { registry: 1, plugins: {} });
-index.plugins[name] = { about, latest };
+index.plugins[name] = { about, latest, runs: plugin.versions[latest].runs ?? runs };
 index.plugins = Object.fromEntries(Object.entries(index.plugins).sort(([a], [b]) => a.localeCompare(b)));
 write(indexPath, index);
 

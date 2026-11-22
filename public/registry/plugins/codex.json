@@ -30,7 +30,10 @@
           "sha256": "ac048debba22e7ff86cc2435c05962bb689bbb8a5861f34ecffb3efc8e986b4e",
           "size": 355902
         }
-      }
+      },
+      "runs": [
+        "repository"
+      ]
     }
   }
 }
