@@ -99,6 +99,30 @@ kito-server --dir /srv/kito user add bob --identity github:bob --repo shop:write
 See [GitHub](../../plugins/github/) and [OpenID Connect](../../plugins/oidc/)
 for setting each up. Tokens stay for scripts and agents.
 
+## Audit log and backups
+
+Everything that changes the server is kept: people and their access,
+rules, plugins, repositories, sign-ins, and each request for 90 days.
+Each line is chained to the one before, so a change to the log is found.
+
+```bash
+kito-server --dir /srv/kito audit
+kito-server --dir /srv/kito audit --verify
+```
+
+The whole server is backed up while it serves, every 24 hours, the last
+14 kept, compressed and encrypted. The first backup prints the key once:
+keep it somewhere else, a restore needs it.
+
+```bash
+kito-server --dir /srv/kito backup                    # one now
+kito-server --dir /srv/kito backup s3 --endpoint https://s3.eu-central-1.amazonaws.com --bucket my-kito --keys keys.txt
+kito-server --dir /srv/kito restore kito-backup-2026-11-22T031500Z.kbak --to /srv/kito-restored
+```
+
+Admins read the log and run a backup from a connected directory too:
+`kito audit`, `kito backup now`.
+
 ## Serve it
 
 `--listen` says where the server answers; without it, it answers this
