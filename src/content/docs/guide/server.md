@@ -123,6 +123,26 @@ kito-server --dir /srv/kito restore kito-backup-2026-11-22T031500Z.kbak --to /sr
 Admins read the log and run a backup from a connected directory too:
 `kito audit`, `kito backup now`.
 
+## Repositories
+
+Admins add, rename and archive repositories from any directory connected
+to the server, or from the web client's Repositories page. Whoever adds
+one maintains it.
+
+```bash
+kito repos add notes                                  # empty
+kito repos add api --from https://github.com/acme/api.git --token-file token.txt
+kito repos add mine --push ~/code/mine                # sent from this machine, history and all
+kito repos rename api backend                         # the old name still works
+kito repos archive backend                            # hidden; deleted after 30 days
+```
+
+A token for a private address is used once for the clone and kept
+nowhere. An archived repository is out of reach; an owner brings it back
+with `kito repos unarchive` or deletes it at once with `kito repos delete
+<name> --confirm <name>`. On the server's machine: `kito-server repo
+archive | unarchive | delete | rename`.
+
 ## Serve it
 
 `--listen` says where the server answers; without it, it answers this
