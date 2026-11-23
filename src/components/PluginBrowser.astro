@@ -4,7 +4,15 @@
 // Without JavaScript every card shows, and the controls, which would do
 // nothing, stay hidden: the script at the end shows them.
 // Meant to be on a page once: the field has an id for its label.
+import { readFileSync } from 'node:fs';
 import plugins from '../data/plugins.json';
+
+// A plugin's version is the one the registry lists as its latest: the
+// file Kito itself reads, which scripts/registry-sync.sh writes. It is
+// said nowhere else. (Read from the site's own directory, where it is
+// built from.)
+const registry = JSON.parse(readFileSync('public/registry/index.json', 'utf8'));
+const versionOf = (name: string): string | undefined => registry.plugins?.[name]?.latest;
 
 const kinds = [
 	{ value: 'all', label: 'All' },
@@ -56,10 +64,14 @@ const kindLabel = (kind: string) => kinds.find((known) => known.value === kind)?
 								</dd>
 							))}
 						</div>
-						<div>
-							<dt>Version</dt>
-							<dd>{plugin.version}</dd>
-						</div>
+						{
+							versionOf(plugin.name) && (
+								<div>
+									<dt>Version</dt>
+									<dd>{versionOf(plugin.name)}</dd>
+								</div>
+							)
+						}
 					</dl>
 					<a class="more" href={'/' + plugin.page}>
 						More on {plugin.program}

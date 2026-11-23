@@ -35,7 +35,7 @@ curl -fsSL https://kito.sh/install.sh | sh
 
 The script takes the latest [release on GitHub](https://github.com/KitoOrg/kito/releases)
 for your platform, checks it against its SHA-256, and puts the four
-programs in `~/.local/bin`. `KITO_VERSION=0.27.0` installs another
+programs in `~/.local/bin`. `KITO_VERSION=0.39.1` installs another
 version, `KITO_INSTALL_DIR` another directory. The archives are on the
 [download page](../download/).
 

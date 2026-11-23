@@ -9,7 +9,7 @@
 # Codex, ZCode) and asks, for each, whether every new Kito project should
 # get it set up: the answer is kept with `kito assistant default`.
 #
-# KITO_VERSION=0.27.0    a version instead of the latest
+# KITO_VERSION=0.39.1    a version instead of the latest
 # KITO_INSTALL_DIR=DIR   where the programs go
 # KITO_RELEASES=URL      the releases (default https://github.com/KitoOrg/kito/releases)
 # KITO_NO_ASK=1          ask nothing: say what was found, and how to choose
@@ -42,7 +42,7 @@ esac
 
 version="${KITO_VERSION:-}"
 if [ -z "$version" ]; then
-  # The latest release is where its page sends: .../releases/tag/v0.27.0
+  # The latest release is where its page sends: .../releases/tag/v0.39.1
   latest=$(curl -fsLI -o /dev/null -w '%{url_effective}' "$RELEASES/latest") \
     || die "no release yet at $RELEASES (see https://kito.sh/install/ to build from source)"
   version="${latest##*/}"

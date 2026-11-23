@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 # Lists the latest release of each plugin in the registry: downloads the
 # archives of the release from GitHub (they stay there), and runs
-# registry-add.mjs for each platform. It changes public/registry and
-# nothing else: the change is reviewed and merged like any other.
+# registry-add.mjs for each platform. Then it writes Kito's own latest
+# release for the site's header (scripts/kito-version.sh). It changes
+# public/registry and src/data/kito.json, and nothing else: the change is
+# reviewed and merged like any other.
 #
 #   scripts/registry-sync.sh                 # every plugin of KitoOrg
 #   scripts/registry-sync.sh web github      # these
@@ -28,3 +30,5 @@ for name in "${plugins[@]}"; do
   done
   echo "kito-$name $tag listed"
 done
+
+bash scripts/kito-version.sh

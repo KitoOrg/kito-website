@@ -5,10 +5,8 @@
 		"summary": "Kito in a browser: lanes and their review, why code is the way it is, the log and notes.",
 		"kinds": ["server", "repository"],
 		"permissions": ["read", "write", "integrate", "pages"],
-		"version": "0.10.0",
 		"program": "kito-web",
-		"page": "plugins/web/",
-		"published": false
+		"page": "plugins/web/"
 	},
 	{
 		"name": "github",
@@ -16,10 +14,8 @@
 		"summary": "Signing in to a team's server with GitHub, and the issues at GitHub as the tasks of lanes.",
 		"kinds": ["server", "repository", "sign-in"],
 		"permissions": ["read", "sign_in", "server_admin"],
-		"version": "0.2.0",
 		"program": "kito-github",
-		"page": "plugins/github/",
-		"published": false
+		"page": "plugins/github/"
 	},
 	{
 		"name": "oidc",
@@ -27,10 +23,8 @@
 		"summary": "Signing in to a team's server with your organization's own sign-on, through OpenID Connect.",
 		"kinds": ["server", "sign-in"],
 		"permissions": ["sign_in", "server_admin"],
-		"version": "0.1.0",
 		"program": "kito-oidc",
-		"page": "plugins/oidc/",
-		"published": false
+		"page": "plugins/oidc/"
 	},
 	{
 		"name": "kitchen",
@@ -38,10 +32,8 @@
 		"summary": "A team's shared behaviour, concepts, recipes and tools, kept on its server and given to every agent.",
 		"kinds": ["server"],
 		"permissions": ["read", "server_admin"],
-		"version": "0.4.0",
 		"program": "kito-kitchen",
-		"page": "plugins/kitchen/",
-		"published": false
+		"page": "plugins/kitchen/"
 	},
 	{
 		"name": "claude",
@@ -49,10 +41,8 @@
 		"summary": "Claude Code set up to work through Kito: its rules, Kito's tools, and the hooks that hold it to them.",
 		"kinds": ["repository", "assistant"],
 		"permissions": ["read"],
-		"version": "0.1.1",
 		"program": "kito-claude",
-		"page": "plugins/claude/",
-		"published": false
+		"page": "plugins/claude/"
 	},
 	{
 		"name": "codex",
@@ -60,10 +50,8 @@
 		"summary": "Codex set up to work through Kito: its rules, Kito's tools, and every patch asked about before it is applied.",
 		"kinds": ["repository", "assistant"],
 		"permissions": ["read"],
-		"version": "0.1.4",
 		"program": "kito-codex",
-		"page": "plugins/codex/",
-		"published": false
+		"page": "plugins/codex/"
 	},
 	{
 		"name": "zcode",
@@ -71,9 +59,7 @@
 		"summary": "ZCode set up to work through Kito: its rules and Kito's tools in the project, its hooks in your own configuration.",
 		"kinds": ["repository", "assistant"],
 		"permissions": ["read"],
-		"version": "0.2.0",
 		"program": "kito-zcode",
-		"page": "plugins/zcode/",
-		"published": false
+		"page": "plugins/zcode/"
 	}
 ]

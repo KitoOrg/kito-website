@@ -294,4 +294,4 @@ kito-server restore <archive> --to <empty directory> --key <key file>
 
 ## Version
 
-0.19.0
+0.20.1

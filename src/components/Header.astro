@@ -5,9 +5,11 @@ import Search from 'virtual:starlight/components/Search';
 import SiteTitle from 'virtual:starlight/components/SiteTitle';
 import SocialIcons from 'virtual:starlight/components/SocialIcons';
 import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+import kito from '../data/kito.json';
 
-// Kito's version, as the download page gives it.
-const VERSION = '0.29';
+// Kito's latest release, as scripts/kito-version.sh found it at GitHub:
+// it is never written here by hand.
+const VERSION = kito.version;
 const here = Astro.url.pathname;
 const parts = [
 	{ href: '/guide/using-kito/', label: 'Guide', under: '/guide/' },

@@ -35,12 +35,10 @@ Check them against GitHub's own page before trusting this table:
 
 - `/` the documents (Astro Starlight, `src/content/docs/`).
 - `/registry/` the registry of plugins (`public/registry/`, ADR 0008 of
-  Kito): empty until something is published.
+  Kito): what `kito plugin add <name>` asks.
 - `/install.sh` installs Kito from the latest GitHub release of
   `KitoOrg/kito` (`curl -fsSL https://kito.sh/install.sh | sh`), and
-  checks the archive against its `.sha256`. The site holds no archive:
-  until that repository is public and has a release, the script says
-  there is none.
+  checks the archive against its `.sha256`. The site holds no archive.
 
 ## Listing a plugin
 
@@ -51,6 +49,10 @@ platform's archive. The archive is listed at the plugin's GitHub release,
 `github.com/KitoOrg/kito-<name>/releases/download/v<version>/`; `--url`
 says where it is otherwise. The site holds no archive. The change is
 reviewed and merged like any other: merging it is publishing.
+
+`scripts/registry-sync.sh [names]` does it for the latest release of
+every plugin, or of the ones named, and then runs
+`scripts/kito-version.sh`.
 
 ## Signing the registry
 
@@ -79,9 +81,19 @@ A tag `v<version>` in `KitoOrg/kito` makes its GitHub release
 `.sha256` for each platform. `install.sh` takes the latest from there;
 nothing of it is put on this site.
 
-## What blocks it today
+Then `scripts/kito-version.sh`, and what it changed is committed: the
+header of every page shows Kito's latest release, and takes it from
+`src/data/kito.json`, which only that script writes.
 
-- The deploy runs on GitHub Actions, which the account's billing has
-  stopped: nothing deploys until that is fixed.
-- The old address, `kitoorg.github.io/kito-website`, redirects to the
-  domain once the domain is set.
+## The versions the site says
+
+None is written by hand where that can be helped:
+
+- Kito's, in the header: `src/data/kito.json`, written by
+  `scripts/kito-version.sh`.
+- A plugin's, on its card: the registry itself
+  (`public/registry/index.json`).
+- A plugin's, at the end of its page (`## Version`): by hand, when the
+  page is brought up to that release. `scripts/check-versions.mjs` runs
+  before every build (`npm run build`, and so the deploy) and stops it
+  when a page says another version than the registry lists.
