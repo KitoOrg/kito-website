@@ -205,11 +205,13 @@ kito-server --dir /srv/kito serve
 A repository added with its history is protected: its main lane changes
 only when a lane is integrated. Its checks, its git remote and the
 approvals it asks for are set on the server. `user add` prints the person's
-token once, and the whole `kito connect` line. Each person connects a
-directory of their own, where `kito` then works as it does in a repository:
+token once, and the whole `kito connect` line. Each person signs in to
+the server once, then makes a directory of the repository, where `kito`
+works as it does in a repository of their own:
 
 ```bash
-kito connect kito.example.com/shop   # signs you in in the browser
+kito connect kito.example.com   # signs you in in the browser; the server is remembered
+kito clone shop                 # a directory of the repository
 ```
 
 People have roles. `read` sees and follows. `write` opens lanes and works

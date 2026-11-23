@@ -192,8 +192,23 @@ that are open.
 Admins and owners of the server maintain every repository. For admins
 there is also a page of everybody on the server: a new person gets a
 token, shown once, or signs in one of the ways the server offers. Only an
-owner names admins and owners. See
-[Running a Kito server](../../guide/server/#people).
+owner names admins and owners.
+
+That page says how each person signs in: with a token, with an account
+one of the server's plugins knows, or both. **Sign-in** on a person's row
+changes it: a new token (shown once; the one in use stops working), the
+token taken away, an account linked by its login, or unlinked. Nobody is
+left with no way to sign in, and what is taken away ends the sessions it
+opened. See [Running a Kito server](../../guide/server/#people).
+
+### Account
+
+Under your name in the top bar: how you sign in to this server, changed
+by yourself. A new token is shown once, and the one in use stops working.
+An account is linked by signing in to it where it lives: you leave for
+GitHub or your organization's sign-in, and come back. A token or an
+account can be taken away as long as another way to sign in is left. Your
+other sessions end with what you took away; the one you are in goes on.
 
 ### Settings
 
@@ -220,14 +235,19 @@ With the [kitchen plugin](../kitchen/), under the Server menu: what a team
 shares to work on its repositories. Each kitchen is read part by part, and
 whoever may write in it changes a file in the browser: a lane is opened
 for it, and integrated when they may integrate. Maintainers say which
-repositories use it. The kitchen plugin's page says how a kitchen is
-started.
+repositories use it.
+
+An admin creates a kitchen there: a title, the name of its repository,
+and the repositories it is for, which use it from then on. A new kitchen
+has nothing in it: its page gives the line that connects a directory to
+it, where your assistant
+[drafts it with you](../kitchen/#drafting-it-with-your-assistant).
 
 ### Repositories
 
 For the server's admins: every repository, who has it, and its size. One
-is added empty, or from a git address (a token for a private one is used
-once and kept nowhere). Whoever adds a repository maintains it. One that
+is added new, with a README to start from, or from a git address (a token
+for a private one is used once and kept nowhere). Whoever adds a repository maintains it. One that
 is archived is out of reach, and deleted after the days the server keeps
 archived ones; an owner restores it or deletes it before then. A renamed
 repository is still reached by its old name. To send one from your

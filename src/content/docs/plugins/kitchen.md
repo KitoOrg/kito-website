@@ -23,53 +23,97 @@ is nothing to enable: the server did.
    kito-server plugin enable kitchen --for-clients
    ```
 
-2. **The files to start from**, and a repository of the server made of
-   them:
+2. **The kitchen.** In the [web client](../web/#kitchens), an admin opens
+   Kitchens and creates one: a title, the name of its repository, and the
+   repositories it is for. The kitchen is a new repository of the server,
+   and the repositories that were ticked use it from then on.
 
-   ```bash
-   kito-server kitchen new ./kitchen "Shopworks"
-   kito-server repo add kitchen --from <a git repository of them>
-   ```
+3. **Its text**, [drafted with your assistant](#drafting-it-with-your-assistant)
+   or written by hand. A kitchen is changed like code: in a lane of its
+   repository, reviewed and integrated. In the web client, a file of the
+   kitchen is edited in the browser, and a lane is opened for the change.
 
-   Or from any directory connected to the server:
-   `kito repos add kitchen --push ./kitchen`.
+### Drafting it with your assistant
 
-3. **Which repository is the kitchen**, and what each repository picks:
-
-   ```bash
-   kito-server kitchen set kitchen
-   kito-server kitchen parts shop rust web            # what `shop` picks
-   kito-server repo set shop --kitchen kitchen        # its instructions, for `shop`
-   kito-server kitchen show shop                      # what it gets
-   kito-server kitchen check                          # what is wrong with it
-   ```
-
-   In the [web client](../web/#kitchens), a repository's maintainers
-   choose its kitchen in Settings, or from the kitchen's own page.
-
-4. **Its text.** The starter files are a short behaviour, one concept,
-   one recipe and one instruction: examples to replace. They are written
-   like code: in a lane of the kitchen's repository, reviewed and
-   integrated.
-   In the web client, a file of the kitchen is edited in the browser, and
-   a lane is opened for the change.
-
-### With an assistant
-
-A kitchen is Markdown in a repository, so an assistant can draft it.
-Connect a directory to the kitchen's repository and ask there:
+A new kitchen has nothing in it. Whoever maintains its repository
+connects a directory to it, and starts their assistant there:
 
 ```bash
 kito connect kito.example.com/kitchen
+cd kitchen
+claude            # or another assistant Kito is set up for
 ```
 
-> Ask me how we work, one question at a time. Then write `behaviour.md`,
-> a concept for each word we use our own way, and a recipe for each thing
-> we do in steps.
+When its session starts, the assistant is told that the kitchen is empty,
+and offers to draft it with you. It leads an interview:
 
-The assistant opens a lane, writes the files, and asks for the
-integration: what it wrote is reviewed like any change. Nothing in Kito
-asks the questions for you: the prompt is yours.
+1. it says what it found in the repositories the kitchen is for;
+2. it asks how the team works, one question at a time, and skips what the
+   repositories already answer;
+3. it proposes as tools only commands those repositories have written
+   down, one by one, and writes those you say yes to;
+4. it writes everything in one lane of the kitchen's repository;
+5. it shows you the files, fixes what is wrong, and asks for the
+   integration.
+
+The lane can be read and commented in the web client before it is
+integrated; the repositories get the kitchen once it is. On a kitchen
+that has content, ask your assistant to revise it: it changes only what
+you say. The assistant is yours: Kito runs no model.
+
+The draft is written from what you answer and from the repositories the
+kitchen is for, as integrated:
+
+- **what each already tells assistants**: its instructions, and its
+  `CLAUDE.md`, `AGENTS.md`, `.cursorrules` and
+  `.github/copilot-instructions.md`;
+- **what says how it is worked on**: `README`, `CONTRIBUTING`,
+  `package.json`, `Makefile`, `justfile`, `Cargo.toml`, `pyproject.toml`,
+  `go.mod` and its GitHub workflows, the first 4000 characters of each;
+  and the names of its lint and format configuration;
+- **the commands those files name**: the scripts of `package.json`, the
+  targets of the `Makefile`, the recipes of the `justfile`, the `run:`
+  lines of the workflows. None is guessed from the language;
+- **its layout**: its directories, two levels down.
+
+Only a maintainer of the kitchen's repository is given any of this, and
+only of repositories that use the kitchen. It never reads or names:
+
+- what is under `.git`, `node_modules`, `target`, `dist`, `build` or
+  `vendor`;
+- a file whose name starts with `.env`;
+- a name with `secret`, `credential`, `password`, `token`, `id_rsa` or
+  `id_ed25519` in it, or that ends in `.pem`, `.key`, `.p12` or `.pfx`;
+- what is not text, and symbolic links.
+
+### Without the web client
+
+On the server's machine:
+
+```bash
+kito-server kitchen new ./kitchen "Shopworks"      # files to start from
+kito-server repo add kitchen --from <a git repository of them>
+kito-server kitchen set kitchen                    # the kitchen of every repository
+kito-server repo set shop --kitchen kitchen        # or of one
+kito-server kitchen parts shop rust web            # what `shop` picks
+kito-server kitchen show shop                      # what it gets, and why
+kito-server kitchen check                          # what is wrong with it
+```
+
+The files to start from are a short behaviour, one concept, one recipe
+and one instruction: examples to replace. From a directory connected to
+the server, `kito repos add kitchen --push ./kitchen` sends them too.
+
+## Which kitchen a repository gets
+
+A server can have one kitchen for all its repositories, and a repository
+can name one of its own: its maintainers choose it in Settings in the
+[web client](../web/#kitchens), or from the kitchen's page.
+
+- A repository gets the kitchen it names; else the server's.
+- The repository of a kitchen gets that kitchen: whoever works on a
+  kitchen sees it.
+- The parts a repository picks are those of the kitchen it gets.
 
 ## What it asks for
 
@@ -87,7 +131,7 @@ permissions = ["read", "server_admin"]
 A repository on the server, with these files:
 
 ```text
-kitchen.toml            name = "Shopworks"
+kitchen.toml            its name, what it is about, the repositories it is for
 behaviour.md            how agents work here: always told
 concepts/<name>.md      what a word of the team means: looked up
 recipes/<name>.md       how something is done, step by step: looked up
@@ -119,11 +163,13 @@ attached to, at every session, so nothing goes stale there.
 
 People read it with `kito kitchen`, `kito kitchen concept <name>` and
 `kito kitchen recipe <name>`; `kito kitchen run <tool> --lane <lane>` runs
-one of its tools. Agents get four tools next to Kito's own:
+one of its tools. Agents get five tools next to Kito's own:
 
 - `kitchen`: the behaviour, and what concepts, recipes and tools there are;
 - `concept`, `recipe`: the text of one;
-- `run`: one of the kitchen's tools, in the lane the agent works in.
+- `run`: one of the kitchen's tools, in the lane the agent works in;
+- `draft`: in a kitchen's own repository, the interview to draft or
+  revise it by.
 
 When a session starts the agent is told the behaviour and the lists without
 asking, after Kito's own rules. What they answer says whose words these
@@ -147,11 +193,13 @@ says how old it is; what was never asked for is not there to give.
   kitchen's tools as yourself there, unconfined: your call, on your
   machine. `KITO_KITCHEN_NO_TOOLS=1` turns them off altogether. A kitchen's
   scripts are for a Unix shell.
-- Which repository is the kitchen and what each repository picks are kept
-  by the plugin on the server (`plugins/kitchen/config.toml`), not in a
-  repository: they have no history.
+- Which repository is the server's kitchen and what each repository
+  picks are kept by the plugin on the server, not in a repository: they
+  have no history.
 - Everybody who may use a repository of the server may read the kitchen.
+- A draft is as good as the assistant that writes it: read the lane
+  before it is integrated.
 
 ## Version
 
-0.4.0
+0.5.0

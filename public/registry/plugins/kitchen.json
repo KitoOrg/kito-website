@@ -35,6 +35,40 @@
         "server",
         "repository"
       ]
+    },
+    "0.5.0": {
+      "api": 2,
+      "files": {
+        "linux-aarch64": {
+          "url": "https://github.com/KitoOrg/kito-kitchen/releases/download/v0.5.0/kito-kitchen-0.5.0-linux-aarch64.tar.gz",
+          "sha256": "80f1ff75c5dbbb0d726a152939475f6aaa62deb5dc26ed015a0d6e1e165a9492",
+          "size": 533103
+        },
+        "linux-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-kitchen/releases/download/v0.5.0/kito-kitchen-0.5.0-linux-x86_64.tar.gz",
+          "sha256": "114b1391fe4ce5368a78999bf0404e938221d57a2eb7cfa2e82f8ce8034d8e7a",
+          "size": 584117
+        },
+        "macos-arm64": {
+          "url": "https://github.com/KitoOrg/kito-kitchen/releases/download/v0.5.0/kito-kitchen-0.5.0-macos-arm64.tar.gz",
+          "sha256": "6fde3b55b91763bf12ffdc654bef5b5c6a4fca3168b6010d3d89d91c6c0a8bee",
+          "size": 526433
+        },
+        "macos-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-kitchen/releases/download/v0.5.0/kito-kitchen-0.5.0-macos-x86_64.tar.gz",
+          "sha256": "5bf62a100b64dace881847f7427d9363001107a9b198c84eb5dfb017f4036317",
+          "size": 559625
+        },
+        "windows-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-kitchen/releases/download/v0.5.0/kito-kitchen-0.5.0-windows-x86_64.tar.gz",
+          "sha256": "249503c1f79763dfa5ffa7c8462c09189823b53958de453b1e748a1a69ac4ac5",
+          "size": 520375
+        }
+      },
+      "runs": [
+        "server",
+        "repository"
+      ]
     }
   }
 }

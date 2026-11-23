@@ -25,7 +25,7 @@
     },
     "kitchen": {
       "about": "A team's kitchen: the behaviour, concepts and recipes it shares to work on its repositories",
-      "latest": "0.4.0",
+      "latest": "0.5.0",
       "runs": [
         "server",
         "repository"
@@ -40,7 +40,7 @@
     },
     "web": {
       "about": "Kito in a browser: lanes and their review, why code is the way it is, the log, notes",
-      "latest": "0.19.0",
+      "latest": "0.20.1",
       "runs": [
         "server",
         "repository"

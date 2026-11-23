@@ -137,6 +137,40 @@
         "server",
         "repository"
       ]
+    },
+    "0.20.1": {
+      "api": 1,
+      "files": {
+        "linux-aarch64": {
+          "url": "https://github.com/KitoOrg/kito-web/releases/download/v0.20.1/kito-web-0.20.1-linux-aarch64.tar.gz",
+          "sha256": "cec33a48177680f69ad79856781f3f0065c2981bcab394e48dfa0faccc81ea0b",
+          "size": 1102041
+        },
+        "linux-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-web/releases/download/v0.20.1/kito-web-0.20.1-linux-x86_64.tar.gz",
+          "sha256": "e9ecf2c83833039991ff99d4a51e7098c61442f7cbe83bdd2492025b2a992d54",
+          "size": 1134481
+        },
+        "macos-arm64": {
+          "url": "https://github.com/KitoOrg/kito-web/releases/download/v0.20.1/kito-web-0.20.1-macos-arm64.tar.gz",
+          "sha256": "13d596bdcbde9471b0ae81cda09e761a517ff6b03d43b2bb45327eaa40bf405a",
+          "size": 1082015
+        },
+        "macos-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-web/releases/download/v0.20.1/kito-web-0.20.1-macos-x86_64.tar.gz",
+          "sha256": "e40e82e47ed42997c1e9e982ecb9aba50ccd311fd56238c9027ad7fb91ff6f82",
+          "size": 1096292
+        },
+        "windows-x86_64": {
+          "url": "https://github.com/KitoOrg/kito-web/releases/download/v0.20.1/kito-web-0.20.1-windows-x86_64.tar.gz",
+          "sha256": "a57dde095df7c117131a6105406e319fa77621e8803f7f7e86e928ce47f3712e",
+          "size": 1058009
+        }
+      },
+      "runs": [
+        "server",
+        "repository"
+      ]
     }
   }
 }
